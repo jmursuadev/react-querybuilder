@@ -71,9 +71,9 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 				<Button
 					variant="outline"
 					size="sm"
-					className="w-full max-w-[300px] justify-start text-nowrap text-ellipsis"
+					className="max-w-[300px] justify-start flex-grow-1 flex-shrink-0 w-min-content"
 				>
-					{value && value.length > 0 ? value.map((v) => v.value).join(", ") : placeholder}
+					<span className="overflow-hidden w-full text-ellipsis">{value && value.length > 0 ? value.map((v) => v.value ?? v).join(", ") : placeholder}</span>
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent className="p-0" side="right" align="start">
