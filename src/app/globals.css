@@ -4,6 +4,10 @@
 
   @layer base {
     :root {
+      /* BASE COLOR */
+      --blue: 244.23, 71.56%, 57.25%;
+      --blue-rgb: 79, 68, 224;
+
       --background: 0 0% 100%;
       --foreground: 240, 5.62%, 17.45%;
 
@@ -13,8 +17,9 @@
       --popover: 0 0% 100%;
       --popover-foreground: 222.2 84% 4.9%;
 
-      --primary: 222.2 47.4% 11.2%;
-      --primary-foreground: 210 40% 98%;
+      --primary: var(--blue);
+      --primary-foreground: 0 0 100%;
+      --primary-rgb: 79, 68, 224;
 
       --secondary: 210 40% 96.1%;
       --secondary-foreground: 222.2 47.4% 11.2%;
@@ -33,13 +38,11 @@
 
       /* INPUT */
       --input: 0, 0%, 96.47%;
-      --input-foreground: 244.23, 71.56%, 57.25%;
-      --input-placeholder: 244.23, 71.56%, 57.25%;
-      --ring: 222.2 84% 4.9%;
+      --input-foreground: var(--foreground);
+      --input-height: 30px;
+      --ring: var(--primary);
 
       --radius: 0.5rem;
-
-      --blue: 244.23, 71.56%, 57.25%; 
     }
 
     .dark {

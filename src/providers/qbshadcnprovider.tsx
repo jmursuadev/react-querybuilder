@@ -1,14 +1,13 @@
-import { ShadCNValueEditor } from "@/components/ui/shadcn-value-editor";
+import { ShadCNValueEditor, ShadCNValueSelector } from "@/components";
 import { getCompatContextProvider } from "react-querybuilder";
 
 export const shadcnControlElements = {
 	valueEditor: ShadCNValueEditor,
+	valueSelector: ShadCNValueSelector,
 };
 
 export const shadcnTranslations = {
-	fields: {
-		placeholderLabel: "Value...",
-	},
+	fields: {},
 };
 
 export const QueryBuilderShadCNProvider = getCompatContextProvider({

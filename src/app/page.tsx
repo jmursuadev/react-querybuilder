@@ -3,8 +3,7 @@
 import QueryBuilder, { RuleGroup } from "react-querybuilder";
 import { ClientOnly } from "./ClientOnly";
 import "react-querybuilder/dist/query-builder.css";
-import { Card, CardContent } from "@/components/ui/card";
-import { ShadCNQueryBuilder } from "@/components/ui/shadcn-querybuilder";
+import { ShadCNQueryBuilder } from "@/components/shadcn-querybuilder";
 
 export default function Home() {
 	return (
