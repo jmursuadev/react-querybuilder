@@ -1,6 +1,6 @@
 import { QueryBuilderShadCNProvider } from "@/providers/qbshadcnprovider";
 import { SetStateAction, useEffect, useState } from "react";
-import QueryBuilder, { RuleGroupType, RuleGroupTypeAny, usePrevious } from "react-querybuilder";
+import QueryBuilder, { RuleGroupType } from "react-querybuilder";
 
 export const ShadCNQueryBuilder = () => {
 	const [query, setQuery] = useState<RuleGroupType>();
