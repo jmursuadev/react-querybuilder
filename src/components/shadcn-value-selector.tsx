@@ -1,10 +1,9 @@
 import {
-	useSelectElementChangeHandler,
+	toFullOptionList,
 	useValueSelector,
 	ValueSelectorProps,
 } from "react-querybuilder";
 import { Select } from "@/components/ui/select";
-import { toFullOption, toFullOptionList, toFullOptionMap } from "@/lib/utils";
 
 type Val = string[];
 

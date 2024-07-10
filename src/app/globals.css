@@ -8,6 +8,7 @@
       --blue: 244.23, 71.56%, 57.25%;
       --blue-rgb: 79, 68, 224;
       --red: 10.67, 76.27%, 53.73%;
+      --gray: 0, 1%, 56.5%;
 
       --background: 0 0% 100%;
       --foreground: 240, 5.62%, 17.45%;
@@ -34,14 +35,15 @@
       --destructive: var(--red);
       --destructive-foreground: 210 40% 98%;
 
-      --border: 214.3 31.8% 91.4%;
+      /* --border: 214.3 31.8% 91.4%; */
+      --border: var(--gray);
       --border-input: 244.23, 71.56%, 57.25%;
 
       /* INPUT */
       --input: 0, 0%, 96.47%;
       --input-foreground: var(--foreground);
       --input-height: 30px;
-      --ring: var(--primary);
+      --ring: var(--primary-rgb);
 
       --radius: 0.5rem;
     }

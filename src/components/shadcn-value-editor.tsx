@@ -1,5 +1,10 @@
-import { useValueEditor, ValueEditorProps } from "react-querybuilder";
-import { Input } from "@/components/ui/input";
+import {
+	useValueEditor,
+	ValueEditorProps,
+} from "react-querybuilder";
+import { Input, Combobox, MultiCombobox } from "@/components/ui";
+import { ComboboxOption, ComboboxValue } from "@/types/combobox";
+import { toFullOptionList } from "@/lib/utils";
 
 export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 	const {
@@ -34,6 +39,21 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 
 	const inputTypeCoerced = inputType || "text";
 	const placeHolderText = fieldData?.placeholder ?? "Value...";
+
+	switch (type) {
+		case "multiselect":
+			return (
+				<MultiCombobox
+					onChange={(e) => {
+						console.log(e, "VAL");
+						handleOnChange(e);
+					}}
+					options={toFullOptionList(values) as ComboboxOption[]}
+					value={valueAsArray as ComboboxValue[]}
+				/>
+			);
+			break;
+	}
 
 	return (
 		<Input

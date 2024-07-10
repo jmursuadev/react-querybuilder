@@ -24,13 +24,13 @@ const config = {
 					DEFAULT: "hsl(var(--input))",
 					foreground: "hsl(var(--input-foreground))",
 				},
-				ring: "hsl(var(--ring))",
+				ring: "rgba(var(--ring))",
 				background: "hsl(var(--background))",
 				foreground: "hsl(var(--foreground))",
 				primary: {
 					DEFAULT: "hsl(var(--primary))",
 					foreground: "hsl(var(--primary-foreground))",
-          rgb: "rgba(var(--primary-rgb), 1)",
+					rgb: "rgba(var(--primary-rgb), 1)",
 				},
 				secondary: {
 					DEFAULT: "hsl(var(--secondary))",
@@ -82,9 +82,9 @@ const config = {
 			maxHeight: {
 				input: "var(--input-height)",
 			},
-      fontSize: {
-        'sm': '0.875rem',
-      }
+			fontSize: {
+				sm: "0.875rem",
+			},
 		},
 	},
 	plugins: [require("tailwindcss-animate")],

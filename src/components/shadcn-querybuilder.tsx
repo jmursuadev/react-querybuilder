@@ -1,6 +1,7 @@
 import { QueryBuilderShadCNProvider } from "@/providers/qbshadcnprovider";
 import { SetStateAction, useEffect, useState } from "react";
-import QueryBuilder, { RuleGroupType } from "react-querybuilder";
+import QueryBuilder, { QueryBuilderProps, RuleGroupType } from "react-querybuilder";
+import fields from "@/data/fields";
 
 export const ShadCNQueryBuilder = () => {
 	const [query, setQuery] = useState<RuleGroupType>();
@@ -11,7 +12,7 @@ export const ShadCNQueryBuilder = () => {
 
 	return (
 		<QueryBuilderShadCNProvider>
-			<QueryBuilder showCombinatorsBetweenRules onQueryChange={setQuery} />
+			<QueryBuilder showCombinatorsBetweenRules onQueryChange={setQuery} fields={fields()} />
 		</QueryBuilderShadCNProvider>
 	);
 };
