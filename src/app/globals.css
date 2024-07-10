@@ -7,6 +7,7 @@
       /* BASE COLOR */
       --blue: 244.23, 71.56%, 57.25%;
       --blue-rgb: 79, 68, 224;
+      --red: 10.67, 76.27%, 53.73%;
 
       --background: 0 0% 100%;
       --foreground: 240, 5.62%, 17.45%;
@@ -30,7 +31,7 @@
       --accent: 210 40% 96.1%;
       --accent-foreground: 222.2 47.4% 11.2%;
 
-      --destructive: 0 84.2% 60.2%;
+      --destructive: var(--red);
       --destructive-foreground: 210 40% 98%;
 
       --border: 214.3 31.8% 91.4%;
