@@ -1,4 +1,6 @@
 import {
+	getFirstOption,
+	standardClassnames,
 	useValueEditor,
 	ValueEditorProps,
 } from "react-querybuilder";
@@ -20,9 +22,12 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 		separator,
 		testID,
 		disabled,
+		listsAsArrays,
 		selectorComponent: SelectorComponent = allProps.schema.controls.valueSelector,
 		...props
 	} = allProps;
+
+	console.log("allProps", allProps);
 
 	const { valueAsArray, multiValueHandler } = useValueEditor({
 		handleOnChange,
@@ -31,28 +36,70 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 		value,
 		type,
 		values,
+		listsAsArrays,
 	});
 
 	if (operator === "null" || operator === "notNull") {
 		return null;
 	}
 
-	const inputTypeCoerced = inputType || "text";
+	const inputTypeCoerced = ["in", "notIn"].includes(operator) ? "text" : inputType || "text";
 	const placeHolderText = fieldData?.placeholder ?? "Value...";
+
+	if (
+		(operator === "between" || operator === "notBetween") &&
+		(type === "select" || type === "text")
+	) {
+		const editors = ["from", "to"].map((key, i) => {
+			if (type === "text") {
+				return (
+					<Input
+						key={key}
+						type={inputTypeCoerced}
+						value={valueAsArray[i] ?? ""}
+						title={title}
+						className={standardClassnames.valueListItem}
+						disabled={disabled}
+						placeholder={placeHolderText}
+						onChange={(e) => multiValueHandler(e.target.value, i)}
+					/>
+				);
+			}
+
+			return (
+				<SelectorComponent
+					{...allProps}
+					key={key}
+					className={standardClassnames.valueListItem}
+					handleOnChange={(v: any) => multiValueHandler(v, i)}
+					disabled={disabled}
+					value={valueAsArray[i] ?? getFirstOption(values)}
+					options={values}
+					listsAsArrays={listsAsArrays}
+				/>
+			);
+		});
+
+		return (
+			<span data-testid={testID} className={className} title={title}>
+				{editors[0]}
+				{separator}
+				{editors[1]}
+			</span>
+		);
+	}
 
 	switch (type) {
 		case "multiselect":
 			return (
 				<MultiCombobox
-					onChange={(e) => {
-						console.log(e, "VAL");
-						handleOnChange(e);
-					}}
+					placeholder="Select..."
+					onChange={handleOnChange}
 					options={toFullOptionList(values) as ComboboxOption[]}
-					value={valueAsArray as ComboboxValue[]}
+					value={value}
+					isValueArray={listsAsArrays}
 				/>
 			);
-			break;
 	}
 
 	return (

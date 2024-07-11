@@ -9,14 +9,17 @@ function isObject(obj: any) {
 	return obj !== null && typeof obj === "object" && !Array.isArray(obj);
 }
 
-function toggleObjectInArray(array: any[], object: any) {
-	if (!object) return array;
+function toggleValueInArray(array: any[], value: any, key: string = "value") {
+	const compare = isObject(value) ? value[key] : value;
 
-	const valueKey = object.hasOwnProperty("value") ? "value" : "name";
+	function extractValue(item: any) {
+		return isObject(item) ? item[key] : item;
+	}
 
-	const index = array.findIndex((item) => item[valueKey] === object[valueKey]); // Using isEqual for deep comparison
+	const index = array.findIndex((item) => extractValue(item) === compare); // Using isEqual for deep comparison
+
 	if (index === -1) {
-		array.push(object); // Object not found, so push it
+		array.push(value); // Object not found, so push it
 	} else {
 		array.splice(index, 1); // Object found, so remove it
 	}
@@ -47,4 +50,4 @@ function toFullOptionList(options: any[]) {
 }
 
 export { toOptions, toFullOptionMap } from "react-querybuilder";
-export { cn, isObject, toggleObjectInArray, toFullOptionList, toFullOption };
+export { cn, isObject, toggleValueInArray, toFullOptionList, toFullOption };

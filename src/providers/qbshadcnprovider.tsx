@@ -4,7 +4,7 @@ import { getCompatContextProvider } from "react-querybuilder";
 
 export const shadcnControlElements = {
 	valueEditor: ShadCNValueEditor,
-	valueSelector: ShadCNValueSelector,
+	valueSelector: ShadCNValueSelector
 };
 
 export const shadcnTranslations = {
