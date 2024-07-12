@@ -54,6 +54,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 			if (type === "text") {
 				return (
 					<Input
+						data-testid={testID}
 						key={key}
 						type={inputTypeCoerced}
 						value={valueAsArray[i] ?? ""}
@@ -68,7 +69,8 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 
 			return (
 				<SelectorComponent
-					{...allProps}
+					{...props}
+					data-testid={testID}
 					key={key}
 					className={standardClassnames.valueListItem}
 					handleOnChange={(v: any) => multiValueHandler(v, i)}
@@ -93,6 +95,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 		case "multiselect":
 			return (
 				<MultiCombobox
+					data-testid={testID}
 					placeholder="Select..."
 					onChange={handleOnChange}
 					options={toFullOptionList(values) as ComboboxOption[]}
@@ -100,10 +103,23 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 					isValueArray={listsAsArrays}
 				/>
 			);
+		case "select":
+			return (
+				<SelectorComponent
+					{...props}
+					data-testid={testID}
+					className={standardClassnames.valueListItem}
+					disabled={disabled}
+					value={value ?? getFirstOption(values)}
+					options={values}
+					handleOnChange={handleOnChange}
+				/>
+			);
 	}
 
 	return (
 		<Input
+			data-testid={testID}
 			type={inputTypeCoerced}
 			value={value}
 			title={title}
