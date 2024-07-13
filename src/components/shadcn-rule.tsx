@@ -44,7 +44,7 @@ export const ShadCNRule = memo((r: RuleProps) => {
 	);
 
 	return (
-		<div className="flex gap-2">
+		<div className="flex gap-2 items-center">
 			{!r.schema.independentCombinators &&
 				r.schema.showCombinatorsBetweenRules &&
 				r.path[1] !== 0 && (
@@ -54,7 +54,11 @@ export const ShadCNRule = memo((r: RuleProps) => {
 						options={r.schema.combinators}
 						value={parentGroup.combinator}
 						title={r.translations.combinators.title}
-						className={cn(standardClassnames.combinators, "!lowercase")}
+						className={cn(
+							standardClassnames.combinators,
+							"!lowercase",
+							"!bg-transparent border-0 hover:!ring-0 hover:!bg-primary-rgb-light data-[state=open]:!bg-primary-rgb-light data-[state=open]:!text-primary"
+						)}
 						handleOnChange={handleCombinatorChange}
 						rules={parentGroup.rules}
 						level={parentPath.length}
@@ -66,6 +70,9 @@ export const ShadCNRule = memo((r: RuleProps) => {
 						schema={r.schema}
 					/>
 				)}
+			{!r.schema.independentCombinators &&
+				r.schema.showCombinatorsBetweenRules &&
+				r.path[1] === 0 && <span className="text-sm">where</span>}
 
 			<RuleControlElement {...r} />
 		</div>

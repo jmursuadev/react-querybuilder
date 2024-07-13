@@ -34,6 +34,7 @@ export const shadcnControlClassnames = {
 	removeRule: "hover:bg-input rounded-md p-1",
 	ruleGroup: "!bg-white !border-outline !rounded-lg !pb-3",
 	rule: "[&.queryBuilder-invalid>.rule-value]:!border-destructive [&.queryBuilder-invalid>.rule-value]:placeholder:!text-destructive",
+	body: "px-5 py-3"
 };
 
 const QueryBuilderBaseProvider = getCompatContextProvider({
