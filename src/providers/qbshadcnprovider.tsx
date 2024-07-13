@@ -1,7 +1,7 @@
-import { ShadCNValueEditor, ShadCNValueSelector, ShadCNFieldSelector, ShadCNAddRule } from "@/components";
+import { ShadCNValueEditor, ShadCNValueSelector, ShadCNFieldSelector, ShadCNAddRule, ShadCNDragHandle, ShadCNRuleGroup } from "@/components";
 import { TrashIcon } from "@/components/icons";
 import { createContext, useState } from "react";
-import { add, FullField, getCompatContextProvider } from "react-querybuilder";
+import { add, FullField, getCompatContextProvider, ShiftActions } from "react-querybuilder";
 
 const NullComponent = () => null;
 
@@ -9,8 +9,15 @@ export const shadcnControlElements = {
 	valueEditor: ShadCNValueEditor,
 	valueSelector: ShadCNValueSelector,
 	fieldSelector: ShadCNFieldSelector,
-	addRuleAction: ShadCNAddRule,
+	addRuleAction: NullComponent,
+	shiftActions: NullComponent,
+	notToggle: NullComponent,
 	addGroupAction: NullComponent,
+	removeGroupAction: NullComponent,
+	cloneGroupAction: NullComponent,
+	lockGroupAction: NullComponent,
+	dragHandle: ShadCNDragHandle,
+	ruleGroup: ShadCNRuleGroup
 };
 
 export const shadcnTranslations = {
@@ -21,10 +28,9 @@ export const shadcnTranslations = {
 };
 
 export const shadcnControlClassnames = {
+	queryBuilder: "[&>.ruleGroup]:border-0 [&>.ruleGroup]:p-0 w-full",
 	removeRule: "hover:bg-input rounded-md p-1",
 	ruleGroup: "!bg-white !border-outline !rounded-lg !pb-3",
-	header: "order-2",
-	body: "order-1",
 	rule: "[&.queryBuilder-invalid>.rule-value]:!border-destructive [&.queryBuilder-invalid>.rule-value]:placeholder:!text-destructive",
 };
 

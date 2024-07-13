@@ -19,7 +19,7 @@ import { FieldSelectorProps, FullField, getOption } from "react-querybuilder";
 
 export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 	const [open, setOpen] = useState(false);
-	// console.log("ALLPROPS", allProps);
+
 	const {
 		disabled,
 		options,
@@ -38,7 +38,6 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 		triggerElement: TriggerElement,
 	} = allProps;
 	const { recentField, setRecentField } = useContext(QueryBuilderShadCNContext);
-
 	const valueOption = useMemo(() => getOption(options, value ?? ""), [options, value]);
 
 	const renderIcon = (opt: any) => {
@@ -67,6 +66,10 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 			</Button>
 		);
 	};
+
+	if (level === 0) {
+		return null;
+	}
 
 	return (
 		<>
