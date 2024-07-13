@@ -19,7 +19,6 @@ import { ShadCNAddRule } from "@/components";
 export const ShadCNRuleGroup = memo((props: RuleGroupProps) => {
 	const rg = useRuleGroup(props);
 
-	console.log(props);
 	const addRule = useStopEventPropagation(rg.addRule);
 	const addGroup = useStopEventPropagation(rg.addGroup);
 	const cloneGroup = useStopEventPropagation(rg.cloneGroup);

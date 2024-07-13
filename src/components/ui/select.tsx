@@ -110,6 +110,7 @@ const SelectItem = React.forwardRef<
 	<SelectPrimitive.Item
 		ref={ref}
 		className={cn(
+			"select-item",
 			"hover:bg-primary-rgb/[0.06] data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground rounded-sm px-2 py-1.5 text-sm cursor-pointer",
 			className
 		)}
@@ -133,18 +134,25 @@ const SelectSeparator = React.forwardRef<
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName;
 
 const Select = React.forwardRef<
-	React.ElementRef<typeof SelectPrimitive.Root> & { placeholder?: string; options: any[] },
+	React.ElementRef<typeof SelectPrimitive.Root> & {
+		placeholder?: string;
+		options: any[];
+		className?: string;
+		selectorContentClassName?: string;
+	},
 	React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> & {
 		placeholder?: string;
 		options: any[];
+		className?: string;
+		selectorContentClassName?: string;
 	}
->(({ options, ...props }, ref) => {
+>(({ options, className, selectorContentClassName, ...props }, ref) => {
 	return (
 		<BaseSelect {...props}>
-			<SelectTrigger ref={ref} className={cn("h-input max-h-input")}>
+			<SelectTrigger ref={ref} className={cn("h-input max-h-input", className)}>
 				<SelectValue placeholder={props.placeholder} />
 			</SelectTrigger>
-			<SelectContent>
+			<SelectContent className={selectorContentClassName}>
 				{options
 					? options.map((opt) => (
 							<SelectItem value={opt.value} key={opt.value}>

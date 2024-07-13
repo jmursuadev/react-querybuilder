@@ -6,3 +6,4 @@ export * from "./shadcn-field-selector";
 export * from "./shadcn-add-rule";
 export * from "./shadcn-drag-handle";
 export * from "./shadcn-rule-group";
+export * from "./shadcn-rule";

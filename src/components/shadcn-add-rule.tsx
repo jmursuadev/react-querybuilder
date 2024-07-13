@@ -3,7 +3,7 @@ import { ShadCNFieldSelector } from "./shadcn-field-selector";
 import { Button, ButtonProps } from "./ui";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { forwardRef } from "react";
-import { ActionProps, ActionWithRulesAndAddersProps, add, getOption, toArray } from "react-querybuilder";
+import { ActionWithRulesAndAddersProps, add, getOption, toArray } from "react-querybuilder";
 
 export const ShadCNAddRule = (props: ActionWithRulesAndAddersProps) => {
 	const { schema, path } = props;

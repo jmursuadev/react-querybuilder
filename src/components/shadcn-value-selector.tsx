@@ -3,8 +3,10 @@ import { Select } from "@/components";
 
 type Val = string[];
 
-export const ShadCNValueSelector = (allProps: ValueSelectorProps) => {
-	const { options, testID, title, className } = allProps;
+export const ShadCNValueSelector = (
+	allProps: ValueSelectorProps & { selectorContentClassName?: string }
+) => {
+	const { options, testID, title, className, selectorContentClassName } = allProps;
 	const { onChange, val } = useValueSelector(allProps);
 
 	// Seperate the props from the allProps object
@@ -15,6 +17,7 @@ export const ShadCNValueSelector = (allProps: ValueSelectorProps) => {
 		id: testID,
 		title: title,
 		className,
+		selectorContentClassName,
 	};
 
 	// es-lint-disable-next-line @typescript-eslint/no-explicit-any

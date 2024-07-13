@@ -1,4 +1,4 @@
-import { ShadCNValueEditor, ShadCNValueSelector, ShadCNFieldSelector, ShadCNAddRule, ShadCNDragHandle, ShadCNRuleGroup } from "@/components";
+import { ShadCNValueEditor, ShadCNValueSelector, ShadCNFieldSelector, ShadCNAddRule, ShadCNDragHandle, ShadCNRuleGroup, ShadCNRule } from "@/components";
 import { TrashIcon } from "@/components/icons";
 import { createContext, useState } from "react";
 import { add, FullField, getCompatContextProvider, ShiftActions } from "react-querybuilder";
@@ -9,6 +9,9 @@ export const shadcnControlElements = {
 	valueEditor: ShadCNValueEditor,
 	valueSelector: ShadCNValueSelector,
 	fieldSelector: ShadCNFieldSelector,
+	dragHandle: ShadCNDragHandle,
+	ruleGroup: ShadCNRuleGroup,
+	rule: ShadCNRule,
 	addRuleAction: NullComponent,
 	shiftActions: NullComponent,
 	notToggle: NullComponent,
@@ -16,8 +19,7 @@ export const shadcnControlElements = {
 	removeGroupAction: NullComponent,
 	cloneGroupAction: NullComponent,
 	lockGroupAction: NullComponent,
-	dragHandle: ShadCNDragHandle,
-	ruleGroup: ShadCNRuleGroup
+	inlineCombinator: NullComponent
 };
 
 export const shadcnTranslations = {
