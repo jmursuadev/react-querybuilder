@@ -20,17 +20,22 @@ const config = {
 		extend: {
 			colors: {
 				border: "hsl(var(--border))",
+				outline: "hsl(var(--outline))",
 				input: {
 					DEFAULT: "hsl(var(--input))",
 					foreground: "hsl(var(--input-foreground))",
 				},
 				ring: "rgba(var(--ring))",
 				background: "hsl(var(--background))",
-				foreground: "hsl(var(--foreground))",
+				foreground: {
+					DEFAULT: "hsl(var(--foreground))",
+					gray: "hsl(var(--foreground-gray))",
+				},
 				primary: {
 					DEFAULT: "hsl(var(--primary))",
 					foreground: "hsl(var(--primary-foreground))",
 					rgb: "rgba(var(--primary-rgb), 1)",
+					"rgb-light": "rgba(var(--primary-rgb), 0.06)",
 				},
 				secondary: {
 					DEFAULT: "hsl(var(--secondary))",
@@ -51,6 +56,7 @@ const config = {
 				popover: {
 					DEFAULT: "hsl(var(--popover))",
 					foreground: "hsl(var(--popover-foreground))",
+					border: "hsl(var(--border-popover))",
 				},
 				card: {
 					DEFAULT: "hsl(var(--card))",
@@ -84,6 +90,9 @@ const config = {
 			},
 			fontSize: {
 				sm: "0.875rem",
+			},
+			boxShadow: {
+				"drop-box": "var(--popover-shadow)",
 			},
 		},
 	},

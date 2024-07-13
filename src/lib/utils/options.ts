@@ -1,13 +1,4 @@
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
-function cn(...inputs: ClassValue[]) {
-	return twMerge(clsx(inputs));
-}
-
-function isObject(obj: any) {
-	return obj !== null && typeof obj === "object" && !Array.isArray(obj);
-}
+import { isObject } from ".";
 
 function toggleValueInArray(array: any[], value: any, key: string = "value") {
 	const compare = isObject(value) ? value[key] : value;
@@ -49,5 +40,4 @@ function toFullOptionList(options: any[]) {
 	return options.map((opt) => toFullOption(opt));
 }
 
-export { toOptions, toFullOptionMap } from "react-querybuilder";
-export { cn, isObject, toggleValueInArray, toFullOptionList, toFullOption };
+export { toggleValueInArray, toFullOptionList, toFullOption };

@@ -1,5 +1,5 @@
 import { toFullOptionList, useValueSelector, ValueSelectorProps } from "react-querybuilder";
-import { Select } from "@/components/ui/select";
+import { Select } from "@/components";
 
 type Val = string[];
 

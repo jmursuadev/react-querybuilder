@@ -10,9 +10,9 @@ import {
 	CommandItem,
 	CommandGroup,
 	Checkbox,
-} from "@/components/ui";
-import { ComboboxOption, ComboboxProps, ComboboxValue, MultiComboboxProps } from "@/types/combobox";
-import { useState, isValidElement, cloneElement, FC, Fragment, useMemo } from "react";
+} from "@/components";
+import { ComboboxOption, ComboboxValue, MultiComboboxProps } from "@/types/combobox";
+import { useState, FC } from "react";
 import { cn, isObject, toggleValueInArray } from "@/lib/utils";
 import { FullOption, toFlatOptionArray } from "react-querybuilder";
 import { useComboboxHandler } from "@/hooks/useComboboxHandler";
@@ -25,6 +25,7 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 	onChange,
 	labelKey = "label",
 	valueKey = "value",
+	className,
 	...props
 }) => {
 	const [open, setOpen] = useState<boolean>(false);
@@ -76,7 +77,10 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 				<Button
 					variant="outline"
 					size="sm"
-					className="max-w-[300px] justify-start flex-grow-1 flex-shrink-0 w-min-content bg-input max-h-input"
+					className={cn(
+						"max-w-[300px] justify-start flex-grow-1 flex-shrink-0 w-min-content bg-input max-h-input",
+						className
+					)}
 				>
 					<span className="overflow-hidden w-full text-ellipsis">
 						{renderValue()}
@@ -118,51 +122,4 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 	);
 };
 
-const Combobox: FC<ComboboxProps> = ({ placeholder, value, options, onChange, ...props }) => {
-	const [open, setOpen] = useState<boolean>(false);
-
-	const renderValue = (val: string) => {
-		const option = options.find((opt) => opt.value === val) as ComboboxValue;
-
-		return (
-			<span key={option.value}>
-				{option.icon && isValidElement(option.icon) && cloneElement(option.icon, {})}
-				{option.label}
-			</span>
-		);
-	};
-
-	return (
-		<Popover open={open} onOpenChange={setOpen}>
-			<PopoverTrigger asChild>
-				<Button variant="outline" size="sm" className="w-[150px] justify-start">
-					{(value && renderValue(value)) || placeholder}
-				</Button>
-			</PopoverTrigger>
-			<PopoverContent className="p-0" side="right" align="start">
-				<Command>
-					<CommandInput placeholder="Change status..." />
-					<CommandList>
-						<CommandEmpty>No results found.</CommandEmpty>
-						<CommandGroup className={cn("p-3")}>
-							{options &&
-								options.length > 0 &&
-								options.map((opt) => (
-									<CommandItem
-										key={opt.value}
-										value={opt.value}
-										onSelect={onChange}
-										className={cn("gap-2", "[&>.checkbox-wrapper]:hover:ring")}
-									>
-										<span className="text-foreground">{opt.label}</span>
-									</CommandItem>
-								))}
-						</CommandGroup>
-					</CommandList>
-				</Command>
-			</PopoverContent>
-		</Popover>
-	);
-};
-
-export { Combobox, MultiCombobox };
+export { MultiCombobox };

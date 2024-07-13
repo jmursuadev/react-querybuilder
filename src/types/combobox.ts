@@ -22,6 +22,7 @@ export interface ComboboxBaseProps {
 	value: any;
 	labelKey?: string;
 	valueKey?: string;
+	className?: string;
 }
 
 export interface ComboboxProps extends ComboboxBaseProps {

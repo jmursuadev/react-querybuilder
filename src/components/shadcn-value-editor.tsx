@@ -4,7 +4,7 @@ import {
 	useValueEditor,
 	ValueEditorProps,
 } from "react-querybuilder";
-import { Input, Combobox, MultiCombobox } from "@/components/ui";
+import { Input, Combobox, MultiCombobox } from "@/components";
 import { ComboboxOption, ComboboxValue } from "@/types/combobox";
 import { toFullOptionList } from "@/lib/utils";
 
@@ -26,8 +26,6 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 		selectorComponent: SelectorComponent = allProps.schema.controls.valueSelector,
 		...props
 	} = allProps;
-
-	console.log("allProps", allProps);
 
 	const { valueAsArray, multiValueHandler } = useValueEditor({
 		handleOnChange,
@@ -90,7 +88,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 			</span>
 		);
 	}
-
+	console.log("CLASSNAME", className);
 	switch (type) {
 		case "multiselect":
 			return (
@@ -101,6 +99,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 					options={toFullOptionList(values) as ComboboxOption[]}
 					value={value}
 					isValueArray={listsAsArrays}
+					className={className}
 				/>
 			);
 		case "select":
@@ -108,7 +107,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 				<SelectorComponent
 					{...props}
 					data-testid={testID}
-					className={standardClassnames.valueListItem}
+					className={className}
 					disabled={disabled}
 					value={value ?? getFirstOption(values)}
 					options={values}
@@ -119,6 +118,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 
 	return (
 		<Input
+			className={className}
 			data-testid={testID}
 			type={inputTypeCoerced}
 			value={value}

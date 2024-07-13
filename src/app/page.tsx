@@ -1,8 +1,6 @@
 "use client";
 
-import QueryBuilder, { RuleGroup } from "react-querybuilder";
 import { ClientOnly } from "./ClientOnly";
-import "react-querybuilder/dist/query-builder.css";
 import { ShadCNQueryBuilder } from "@/components/shadcn-querybuilder";
 
 export default function Home() {
