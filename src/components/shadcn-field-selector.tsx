@@ -11,7 +11,14 @@ import {
 import { cn } from "@/lib/utils";
 import { QueryBuilderShadCNContext } from "@/providers/qbshadcnprovider";
 import { ShadCNFieldSelectorProps } from "@/types";
-import { CalendarIcon, LetterCaseCapitalizeIcon, PlusIcon, TimerIcon } from "@radix-ui/react-icons";
+import {
+	CalendarIcon,
+	ClockIcon,
+	DotsVerticalIcon,
+	LetterCaseCapitalizeIcon,
+	PlusIcon,
+	TimerIcon,
+} from "@radix-ui/react-icons";
 import { PopoverAnchor } from "@radix-ui/react-popover";
 import { CommandGroup } from "cmdk";
 import { cloneElement, isValidElement, ReactElement, useContext, useMemo, useState } from "react";
@@ -19,6 +26,8 @@ import { FieldSelectorProps, FullField, getOption } from "react-querybuilder";
 
 export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 	const [open, setOpen] = useState(false);
+	const [subPopoverOpen, setSubPopoverOpen] = useState(false);
+	const [hoverField, setHoverField] = useState<FullField | null>(null);
 
 	const {
 		disabled,
@@ -40,14 +49,14 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 	const { recentField, setRecentField } = useContext(QueryBuilderShadCNContext);
 	const valueOption = useMemo(() => getOption(options, value ?? ""), [options, value]);
 
-	const renderIcon = (opt: any) => {
+	const renderIcon = (opt: any, size: number = 15) => {
 		switch (opt.inputType) {
 			case "datetime-local":
-				return <CalendarIcon width={15} />;
+				return <CalendarIcon width={size} height={size} />;
 			case "time":
-				return <TimerIcon width={15} />;
+				return <TimerIcon width={size} height={size} />;
 			default:
-				return <LetterCaseCapitalizeIcon width={15} />;
+				return <LetterCaseCapitalizeIcon width={size} height={size} />;
 		}
 	};
 
@@ -75,13 +84,21 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 		<>
 			<div>
 				<Popover
+					open={open}
 					onOpenChange={(val) => {
-						val ? setTimeout(() => setOpen(val), 50) : setOpen(val);
+						val ? setTimeout(() => setSubPopoverOpen(val), 50) : setSubPopoverOpen(val);
 					}}
 				>
-					<PopoverTrigger asChild>{renderTrigger()}</PopoverTrigger>
-					<PopoverContent className="p-0 w-full" side="bottom" align="start">
-						<Popover open={open}>
+					<PopoverTrigger asChild onClick={() => setOpen(true)}>
+						{renderTrigger()}
+					</PopoverTrigger>
+					<PopoverContent
+						className="p-0 w-full"
+						side="bottom"
+						align="start"
+						onInteractOutside={() => setOpen(false)}
+					>
+						<Popover open={subPopoverOpen}>
 							<PopoverAnchor className="p-3 pb-0">
 								<div>
 									<Command>
@@ -129,11 +146,15 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 																}
 																key={option.value}
 																value={option}
-																className="text-sm data-[state-active=true]:bg-primary data-[state-active=true]:text-primary-foreground gap-2 w-min-content max-w-[300px] rounded-md"
+																className="text-sm data-[state-active=true]:bg-primary data-[state-active=true]:text-primary-foreground data-[selected=true]:bg-primary-rgb-light data-[selected=true]:text-primary gap-2 w-min-content max-w-[300px] rounded-md"
 																onSelect={() => {
 																	setRecentField(option);
 																	handleOnChange(option.value);
+																	setOpen(false);
 																}}
+																onMouseEnter={() =>
+																	setHoverField(option)
+																}
 															>
 																<span className="flex items-center gap-2 text-nowrap text-ellipsis line-clamp-1">
 																	{renderIcon(option)}{" "}
@@ -148,12 +169,73 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 									</Command>
 								</div>
 							</PopoverAnchor>
-							<PopoverContent side="right" align="start">
-								{value && valueOption && (
+							<PopoverContent side="right" align="start" className="p-0">
+								<div className="p-4 border-b border-outline">
+									{hoverField && (
+										<span className="flex gap-2 items-center text-sm mb-3">
+											{renderIcon(hoverField, 20)}{" "}
+											<span className="text-[#8f8f91] text-sm">User ▸</span>{" "}
+											{hoverField.label}
+										</span>
+									)}
+									<div className="content-body">
+										{hoverField &&
+											recentField &&
+											recentField.value === hoverField.value && (
+												<div className="recently-used bg-green-rgb/[0.1] text-green rounded-full p-1 text-[12px] flex items-center gap-1 mb-3">
+													<ClockIcon />
+													Recently used by you
+												</div>
+											)}
+										<div className="description mb-3">
+											<div className="description-content" slot="content">
+												<div className="description-text-wrapper">
+													<div className="description-text text-[12px] !font-normal text-gray2">
+														<span>
+															Lorem Ipsum is simply dummy text of the
+															printing and typesetting industry. Lorem
+															Ipsum has been the industry's standard
+															dummy text ever since the 1500s, when an
+															unknown printer took a galley of type
+															and scrambled it to make a type specimen
+															book. It has survived not only five
+															centuries, but also the leap into
+															electronic typesetting, remaining
+															essentially unchanged. It was
+															popularised in the 1960s with the
+															release of Letraset sheets containing
+															Lorem Ipsum passages, and more recently
+															with desktop publishing software like
+															Aldus PageMaker including versions of
+															Lorem Ipsum.
+														</span>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div className="detail-section flex flex-col text-[12px] text-gray2">
+											<div className="detail flex items-center gap-2">
+												<div className="detail-name w-[60px] flex-shrink-0">
+													Tracked as
+												</div>
+												<div className="detail-value">$distinct_id</div>
+											</div>
+											<div className="detail flex items-base gap-2">
+												<div className="detail-name w-[60px] flex-shrink-0">
+													Example
+												</div>
+												<div className="detail-value text-sm text-foreground">
+													166424e227e7fb-0ff2f469b2f1fc-2d6a4f35
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="p-3 flex justify-end">
 									<span>
-										{renderIcon(valueOption)} {valueOption.label}
+										<DotsVerticalIcon />
 									</span>
-								)}
+								</div>
 							</PopoverContent>
 						</Popover>
 					</PopoverContent>

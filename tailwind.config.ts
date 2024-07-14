@@ -42,12 +42,18 @@ const config = {
 					foreground: "hsl(var(--secondary-foreground))",
 				},
 				tertiary: {
-					foreground: "rgba(var(--green-rgb), 1)",
+					foreground: "rgba(var(--green-2-rgb), 1)",
 				},
 				destructive: {
 					DEFAULT: "hsl(var(--destructive))",
 					foreground: "hsl(var(--destructive-foreground))",
 				},
+				green: {
+					DEFAULT: "hsl(var(--green))",
+					rgb: "rgba(var(--green-rgb), 1)",
+					2: "rgba(var(--green-2-rgb), 1)",
+				},
+				"gray2": "hsl(var(--gray-2))",
 				muted: {
 					DEFAULT: "hsl(var(--muted))",
 					foreground: "hsl(var(--muted-foreground))",

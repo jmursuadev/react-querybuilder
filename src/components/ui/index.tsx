@@ -8,3 +8,5 @@ export * from "./input";
 export * from "./popover";
 export * from "./select";
 export * from "./dialog"
+export * from "./radio-group";
+export * from "./label";

@@ -4,9 +4,17 @@ import {
 	useValueEditor,
 	ValueEditorProps,
 } from "react-querybuilder";
-import { Input, Combobox, MultiCombobox } from "@/components";
+import {
+	Input,
+	Combobox,
+	MultiCombobox,
+	Checkbox,
+	RadioGroup,
+	RadioGroupItem,
+	Label,
+} from "@/components";
 import { ComboboxOption, ComboboxValue } from "@/types/combobox";
-import { toFullOptionList } from "@/lib/utils";
+import { cn, toFullOptionList } from "@/lib/utils";
 
 export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 	const {
@@ -88,7 +96,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 			</span>
 		);
 	}
-	console.log("CLASSNAME", className);
+	console.log("allProps", allProps, type);
 	switch (type) {
 		case "multiselect":
 			return (
@@ -113,6 +121,26 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 					options={values}
 					handleOnChange={handleOnChange}
 				/>
+			);
+		case "checkbox":
+			return <Checkbox checked={value} onCheckedChange={handleOnChange} />;
+		case "radio":
+			return (
+				<RadioGroup
+					value={value}
+					data-testid={testID}
+					className={cn("flex", className)}
+					title={title}
+					orientation="horizontal"
+					onValueChange={handleOnChange}
+				>
+					{toFullOptionList(values).map((v) => (
+						<div className="flex items-center space-x-2" key={v.value}>
+							<RadioGroupItem value={v.value} id={v.name} />
+							<Label htmlFor={v.name}>{v.label}</Label>
+						</div>
+					))}
+				</RadioGroup>
 			);
 	}
 
