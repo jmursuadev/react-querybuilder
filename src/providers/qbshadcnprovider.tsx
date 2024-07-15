@@ -14,10 +14,8 @@ import {
 	ControlElementsProp,
 	FullField,
 	getCompatContextProvider,
-	QueryBuilderContext,
 	QueryBuilderContextProvider,
 	Translations,
-	useMergedContext,
 } from "react-querybuilder";
 import { QueryBuilderShadCNContextType, QueryBuilderShadCNProps } from "@/types";
 

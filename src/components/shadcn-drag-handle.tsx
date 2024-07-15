@@ -9,7 +9,6 @@ import {
 export const ShadCNDragHandle = forwardRef<HTMLSpanElement, DragHandleProps>((props, ref) => {
 	const { ruleOrGroup } = props;
 	const { dragHandle: DragHandle } = defaultControlElements;
-	console.log("DRAG", props);
 
 	if ((isRuleGroupType(ruleOrGroup) || isRuleGroupTypeIC(ruleOrGroup)) && ruleOrGroup.rules) {
 		return (
