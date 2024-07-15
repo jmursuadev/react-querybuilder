@@ -5,9 +5,10 @@ import { QueryBuilderDnD } from "@react-querybuilder/dnd";
 import * as ReactDnD from "react-dnd";
 import * as ReactDndHtml5Backend from "react-dnd-html5-backend";
 import fields from "@/data/fields";
-import "react-querybuilder/dist/query-builder-layout.scss";
+// import "react-querybuilder/dist/query-builder-layout.scss";
 import { Button } from "@/components";
 import { PlusIcon } from "@radix-ui/react-icons";
+import 'react-querybuilder/dist/query-builder.scss';
 
 // default value for group query
 const defaultGroupQuery = (): RuleGroupTypeIC => {

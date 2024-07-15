@@ -149,7 +149,11 @@ const Select = React.forwardRef<
 >(({ options, className, selectorContentClassName, ...props }, ref) => {
 	return (
 		<BaseSelect {...props}>
-			<SelectTrigger ref={ref} className={cn("h-input max-h-input", className)}>
+			<SelectTrigger
+				data-value={props.value}
+				ref={ref}
+				className={cn("h-input max-h-input", className)}
+			>
 				<SelectValue placeholder={props.placeholder} />
 			</SelectTrigger>
 			<SelectContent className={selectorContentClassName}>

@@ -5,8 +5,7 @@ import {
 	ShadCNDragHandle,
 	ShadCNRuleGroup,
 	ShadCNRule,
-	ShadCNCombinatorSelector,
-	ShadCNInlineCombinator,
+	ShadCNCombinatorSelector
 } from "@/components";
 import { TrashIcon } from "@/components/icons";
 import { createContext, useContext, useState } from "react";
@@ -28,7 +27,6 @@ export const shadcnControlElements = {
 	dragHandle: ShadCNDragHandle,
 	ruleGroup: ShadCNRuleGroup,
 	rule: ShadCNRule,
-	inlineCombinator: ShadCNInlineCombinator,
 	combinatorSelector: ShadCNCombinatorSelector,
 	addRuleAction: NullComponent,
 	shiftActions: NullComponent,

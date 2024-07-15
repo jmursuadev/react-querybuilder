@@ -107,14 +107,14 @@
 
 	/* Inline Combinator for group top level component */
 	.shadcn-rule-group-body {
-		&:has(.betweenRules[data-combinator="and"]) {
-			> .shadcn-rule-group:not(:last-child) {
+		&:has(.betweenRules button[data-value="and"]) {
+			> .shadcn-rule-group:has(+ .betweenRules button[data-value="and"]) {
 				@apply !rounded-b-none;
 			}
 		}
 
 		.shadcn-rule-group {
-			+ div[data-combinator="and"] + .shadcn-rule-group {
+			+ div.betweenRules:has(button[data-value="and"]) + .shadcn-rule-group {
 				@apply !rounded-t-none border-t-0 mt-[-9px];
 			}
 		}
@@ -122,16 +122,16 @@
 		.betweenRules {
 			@apply justify-center;
 
-			&[data-combinator="and"] {
-				@apply mt-[-15px] justify-center;
+			&:has(button[data-value="and"]) {
+				@apply mt-[-15px];
 				z-index: 1;
-
-				> button {
-					@apply bg-primary text-white;
-				}
 			}
 
-			&[data-combinator="or"] {
+			button[data-value="and"] {
+				@apply bg-primary text-white;
+			}
+
+			button[data-value="or"] {
 				@apply my-2;
 
 				> button {
