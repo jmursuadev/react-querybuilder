@@ -179,10 +179,10 @@ const Select = React.forwardRef<
 		</BaseSelect>
 	);
 });
-
 Select.displayName = "Select";
 
 export {
+	BaseSelect,
 	Select,
 	SelectGroup,
 	SelectValue,

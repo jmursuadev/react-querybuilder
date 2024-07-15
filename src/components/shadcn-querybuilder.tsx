@@ -1,14 +1,13 @@
-import { QueryBuilderShadCN, shadcnControlElements } from "@/providers/qbshadcnprovider";
+import { QueryBuilderShadCN } from "@/providers/qbshadcnprovider";
 import { useEffect, useState } from "react";
 import QueryBuilder, { add, generateID, RuleGroupTypeIC } from "react-querybuilder";
 import { QueryBuilderDnD } from "@react-querybuilder/dnd";
 import * as ReactDnD from "react-dnd";
 import * as ReactDndHtml5Backend from "react-dnd-html5-backend";
 import fields from "@/data/fields";
-// import "react-querybuilder/dist/query-builder-layout.scss";
 import { Button } from "@/components";
 import { PlusIcon } from "@radix-ui/react-icons";
-import 'react-querybuilder/dist/query-builder.scss';
+import "react-querybuilder/dist/query-builder.scss";
 
 // default value for group query
 const defaultGroupQuery = (): RuleGroupTypeIC => {
@@ -23,12 +22,7 @@ const initialQuery: RuleGroupTypeIC = {
 	rules: [defaultGroupQuery()],
 };
 
-// overwrite some control elements who overwrite the shadcn control elements from other providers
-const controls = {
-	inlineCombinator: shadcnControlElements.inlineCombinator,
-};
-
-export const ShadCNQueryBuilder = () => {
+const ShadCNQueryBuilder = () => {
 	const [query, setQuery] = useState<RuleGroupTypeIC>(initialQuery);
 
 	useEffect(() => {
@@ -52,7 +46,6 @@ export const ShadCNQueryBuilder = () => {
 						onQueryChange={setQuery}
 						showCombinatorsBetweenRules
 						fields={fields()}
-						controlElements={controls}
 					/>
 					<div className="flex justify-between">
 						<div>
@@ -72,3 +65,5 @@ export const ShadCNQueryBuilder = () => {
 		</QueryBuilderShadCN>
 	);
 };
+
+export { ShadCNQueryBuilder };

@@ -190,7 +190,7 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 										<div className="description mb-3">
 											<div className="description-content" slot="content">
 												<div className="description-text-wrapper">
-													<div className="description-text text-[12px] !font-normal text-gray2">
+													<div className="description-text text-[12px] !font-normal text-gray-2">
 														<span>
 															Lorem Ipsum is simply dummy text of the
 															printing and typesetting industry. Lorem
@@ -213,7 +213,7 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 												</div>
 											</div>
 										</div>
-										<div className="detail-section flex flex-col text-[12px] text-gray2">
+										<div className="detail-section flex flex-col text-[12px] text-gray-2">
 											<div className="detail flex items-center gap-2">
 												<div className="detail-name w-[60px] flex-shrink-0">
 													Tracked as

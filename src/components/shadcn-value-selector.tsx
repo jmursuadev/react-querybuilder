@@ -1,8 +1,6 @@
 import { toFullOptionList, useValueSelector, ValueSelectorProps } from "react-querybuilder";
 import { Select } from "@/components";
 
-type Val = string[];
-
 export const ShadCNValueSelector = (
 	allProps: ValueSelectorProps & { selectorContentClassName?: string }
 ) => {

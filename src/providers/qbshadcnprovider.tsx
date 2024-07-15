@@ -5,7 +5,7 @@ import {
 	ShadCNDragHandle,
 	ShadCNRuleGroup,
 	ShadCNRule,
-	ShadCNCombinatorSelector
+	ShadCNCombinatorSelector,
 } from "@/components";
 import { TrashIcon } from "@/components/icons";
 import { createContext, useContext, useState } from "react";

@@ -6,15 +6,14 @@ import {
 } from "react-querybuilder";
 import {
 	Input,
-	Combobox,
 	MultiCombobox,
 	Checkbox,
 	RadioGroup,
 	RadioGroupItem,
 	Label,
 	Switch,
-} from "@/components";
-import { ComboboxOption, ComboboxValue } from "@/types/combobox";
+} from "./ui";
+import { ComboboxOption } from "@/types/combobox";
 import { cn, toFullOptionList } from "@/lib/utils";
 
 export const ShadCNValueEditor = (allProps: ValueEditorProps) => {

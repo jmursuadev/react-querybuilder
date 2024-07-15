@@ -53,7 +53,10 @@ const config = {
 					rgb: "rgba(var(--green-rgb), 1)",
 					2: "rgba(var(--green-2-rgb), 1)",
 				},
-				"gray2": "hsl(var(--gray-2))",
+				gray: {
+					DEFAULT: "hsl(var(--gray))",
+					2: "hsl(var(--gray-2))",
+				},
 				muted: {
 					DEFAULT: "hsl(var(--muted))",
 					foreground: "hsl(var(--muted-foreground))",
