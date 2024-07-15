@@ -1,8 +1,19 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# React Query Builder Inspired by Mixpanel
+
+This [Next.js]((https://nextjs.org/)) project enhances the [React Query Builder](https://react-querybuilder.js.org/) Package with custom styling using [ShadCN UI](https://ui.shadcn.com/), designed to replicate the layout and functionality of Mixpanel's query builder.
+
 
 ## Getting Started
 
-First, run the development server:
+Ensure Node.js version 18 or higher is installed as a prerequisite.
+
+## Installation
+
+```bash
+npm install
+```
+
+Next, run the development server:
 
 ```bash
 npm run dev
