@@ -11,3 +11,4 @@ export * from "./dialog"
 export * from "./radio-group";
 export * from "./label";
 export * from "./switch";
+export * from "./table";

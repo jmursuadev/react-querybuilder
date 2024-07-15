@@ -18,6 +18,7 @@ export const ShadCNValueSelector = (
 		title: title,
 		className,
 		selectorContentClassName,
+		placeholder: "Select a value...",
 	};
 
 	// es-lint-disable-next-line @typescript-eslint/no-explicit-any

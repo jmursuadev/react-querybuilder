@@ -97,7 +97,7 @@ const SelectLabel = React.forwardRef<
 >(({ className, ...props }, ref) => (
 	<SelectPrimitive.Label
 		ref={ref}
-		className={cn("py-1.5 pl-8 pr-2 text-sm font-semibold", className)}
+		className={cn("py-1.5 pl-2 pr-2 text-sm font-semibold", className)}
 		{...props}
 	/>
 ));
@@ -147,6 +147,23 @@ const Select = React.forwardRef<
 		selectorContentClassName?: string;
 	}
 >(({ options, className, selectorContentClassName, ...props }, ref) => {
+	const renderOption = (opt: FullOption): JSX.Element | JSX.Element[] => {
+		if (opt.options && Array.isArray(opt.options) && options.length > 0) {
+			return (
+				<SelectGroup key={opt.label}>
+					<SelectLabel className="font-bold text-base">{opt.label}</SelectLabel>
+					{opt.options.map((opt: FullOption) => renderOption(opt))}
+				</SelectGroup>
+			);
+		}
+
+		return (
+			<SelectItem value={opt.value} key={opt.value}>
+				{opt.label}
+			</SelectItem>
+		);
+	};
+
 	return (
 		<BaseSelect {...props}>
 			<SelectTrigger
@@ -157,13 +174,7 @@ const Select = React.forwardRef<
 				<SelectValue placeholder={props.placeholder} />
 			</SelectTrigger>
 			<SelectContent className={selectorContentClassName}>
-				{options
-					? options.map((opt) => (
-							<SelectItem value={opt.value} key={opt.value}>
-								{opt.label}
-							</SelectItem>
-					  ))
-					: null}
+				{options ? options.map((opt) => renderOption(opt)) : null}
 			</SelectContent>
 		</BaseSelect>
 	);
