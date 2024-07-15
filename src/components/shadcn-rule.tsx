@@ -37,22 +37,22 @@ export const ShadCNRule = memo((r: RuleProps) => {
 	const handleCombinatorChange = useCallback(
 		(value: any) => {
 			if (!disabled) {
-				onPropChange("combinator", value, parentPath);
+				onPropChange("combinator", value, [r.path[0], r.path[1] - 1]);
 			}
 		},
-		[disabled, onPropChange, parentPath]
+		[disabled, onPropChange, r.path]
 	);
 
 	return (
 		<div className="flex gap-2 items-center">
-			{!r.schema.independentCombinators &&
+			{r.schema.independentCombinators &&
 				r.schema.showCombinatorsBetweenRules &&
 				r.path[1] !== 0 && (
 					<ValueSelectorControlElement
 						selectorContentClassName="[&_.select-item>span]:!lowercase"
 						key={TestID.inlineCombinator}
 						options={r.schema.combinators}
-						value={parentGroup.combinator}
+						value={parentGroup.rules[r.path[1] - 1]}
 						title={r.translations.combinators.title}
 						className={cn(
 							standardClassnames.combinators,
@@ -64,13 +64,12 @@ export const ShadCNRule = memo((r: RuleProps) => {
 						level={parentPath.length}
 						context={r.context}
 						validation={validationResult}
-						// component={ValueSelectorControlElement}
 						path={r.path}
 						disabled={r.disabled}
 						schema={r.schema}
 					/>
 				)}
-			{!r.schema.independentCombinators &&
+			{r.schema.independentCombinators &&
 				r.schema.showCombinatorsBetweenRules &&
 				r.path[1] === 0 && <span className="text-sm">where</span>}
 

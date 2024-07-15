@@ -18,7 +18,7 @@ import { ShadCNAddRule } from "@/components";
  */
 export const ShadCNRuleGroup = memo((props: RuleGroupProps) => {
 	const rg = useRuleGroup(props);
-
+	
 	const addRule = useStopEventPropagation(rg.addRule);
 	const addGroup = useStopEventPropagation(rg.addGroup);
 	const cloneGroup = useStopEventPropagation(rg.cloneGroup);
@@ -26,7 +26,7 @@ export const ShadCNRuleGroup = memo((props: RuleGroupProps) => {
 	const removeGroup = useStopEventPropagation(rg.removeGroup);
 	const shiftGroupUp = useStopEventPropagation(rg.shiftGroupUp);
 	const shiftGroupDown = useStopEventPropagation(rg.shiftGroupDown);
-
+	
 	return (
 		<div
 			ref={rg.previewRef}

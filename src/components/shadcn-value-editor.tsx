@@ -12,6 +12,7 @@ import {
 	RadioGroup,
 	RadioGroupItem,
 	Label,
+	Switch,
 } from "@/components";
 import { ComboboxOption, ComboboxValue } from "@/types/combobox";
 import { cn, toFullOptionList } from "@/lib/utils";
@@ -96,7 +97,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 			</span>
 		);
 	}
-	console.log("allProps", allProps, type);
+
 	switch (type) {
 		case "multiselect":
 			return (
@@ -141,6 +142,16 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 						</div>
 					))}
 				</RadioGroup>
+			);
+		case "switch":
+			return (
+				<Switch
+					checked={value}
+					onCheckedChange={handleOnChange}
+					data-testid={testID}
+					className={cn("flex", className)}
+					title={title}
+				/>
 			);
 	}
 

@@ -7,3 +7,4 @@ export * from "./shadcn-add-rule";
 export * from "./shadcn-drag-handle";
 export * from "./shadcn-rule-group";
 export * from "./shadcn-rule";
+export * from "./shadcn-combinator-selector";

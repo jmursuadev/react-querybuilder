@@ -180,7 +180,14 @@ export default function fields() {
 			{ name: "age", label: "Age", inputType: "number", validator },
 			{
 				name: "isMusician",
-				label: "Is a musician",
+				label: "Is a musician (Switch)",
+				valueEditorType: "switch",
+				operators: defaultOperators.filter((op) => op.name === "="),
+				defaultValue: false,
+			},
+			{
+				name: "isMusicianRadio",
+				label: "Is a musician (Checkbox)",
 				valueEditorType: "checkbox",
 				operators: defaultOperators.filter((op) => op.name === "="),
 				defaultValue: false,

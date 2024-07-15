@@ -1,7 +1,25 @@
-import { ShadCNValueEditor, ShadCNValueSelector, ShadCNFieldSelector, ShadCNAddRule, ShadCNDragHandle, ShadCNRuleGroup, ShadCNRule } from "@/components";
+import {
+	ShadCNValueEditor,
+	ShadCNValueSelector,
+	ShadCNFieldSelector,
+	ShadCNDragHandle,
+	ShadCNRuleGroup,
+	ShadCNRule,
+	ShadCNCombinatorSelector,
+	ShadCNInlineCombinator,
+} from "@/components";
 import { TrashIcon } from "@/components/icons";
-import { createContext, useState } from "react";
-import { add, FullField, getCompatContextProvider, ShiftActions } from "react-querybuilder";
+import { createContext, useContext, useState } from "react";
+import {
+	ControlElementsProp,
+	FullField,
+	getCompatContextProvider,
+	QueryBuilderContext,
+	QueryBuilderContextProvider,
+	Translations,
+	useMergedContext,
+} from "react-querybuilder";
+import { QueryBuilderShadCNContextType, QueryBuilderShadCNProps } from "@/types";
 
 const NullComponent = () => null;
 
@@ -12,6 +30,8 @@ export const shadcnControlElements = {
 	dragHandle: ShadCNDragHandle,
 	ruleGroup: ShadCNRuleGroup,
 	rule: ShadCNRule,
+	inlineCombinator: ShadCNInlineCombinator,
+	combinatorSelector: ShadCNCombinatorSelector,
 	addRuleAction: NullComponent,
 	shiftActions: NullComponent,
 	notToggle: NullComponent,
@@ -19,22 +39,22 @@ export const shadcnControlElements = {
 	removeGroupAction: NullComponent,
 	cloneGroupAction: NullComponent,
 	lockGroupAction: NullComponent,
-	inlineCombinator: NullComponent
-};
+} satisfies ControlElementsProp<FullField, string>;
 
 export const shadcnTranslations = {
 	fields: {},
 	removeRule: {
 		label: <TrashIcon />,
-	}
-};
+	},
+} satisfies Partial<Translations>;
 
 export const shadcnControlClassnames = {
-	queryBuilder: "[&>.ruleGroup]:border-0 [&>.ruleGroup]:p-0 w-full",
+	queryBuilder:
+		"shadcn-query-builder [&>.ruleGroup]:border-0 [&>.ruleGroup]:p-0 w-full [&>.ruleGroup>.ruleGroup-body]:!p-0",
 	removeRule: "hover:bg-input rounded-md p-1",
-	ruleGroup: "!bg-white !border-outline !rounded-lg !pb-3",
-	rule: "[&.queryBuilder-invalid>.rule-value]:!border-destructive [&.queryBuilder-invalid>.rule-value]:placeholder:!text-destructive",
-	body: "px-5 py-3"
+	ruleGroup: "shadcn-rule-group !bg-white !border-outline !rounded-lg !pb-3 p-0",
+	rule: "shadcn-rule [&.queryBuilder-invalid>.rule-value]:!border-destructive [&.queryBuilder-invalid>.rule-value]:placeholder:!text-destructive",
+	body: "shadcn-rule-group-body px-5 py-3",
 };
 
 const QueryBuilderBaseProvider = getCompatContextProvider({
@@ -43,21 +63,16 @@ const QueryBuilderBaseProvider = getCompatContextProvider({
 	controlClassnames: shadcnControlClassnames,
 });
 
-interface QueryBuilderShadCNContextType {
-	recentField: FullField | null;
-	setRecentField: (field: FullField | null) => void;
-}
-
 const QueryBuilderShadCNContext = createContext<QueryBuilderShadCNContextType>({});
 
-const QueryBuilderShadCNProvider = ({ children }: { children: JSX.Element }) => {
+const QueryBuilderShadCN: QueryBuilderContextProvider = (props: QueryBuilderShadCNProps) => {
 	const [recentField, setRecentField] = useState<FullField | null>(null);
 
 	return (
 		<QueryBuilderShadCNContext.Provider value={{ recentField, setRecentField }}>
-			<QueryBuilderBaseProvider>{children}</QueryBuilderBaseProvider>
+			<QueryBuilderBaseProvider {...props} />
 		</QueryBuilderShadCNContext.Provider>
 	);
 };
 
-export { QueryBuilderShadCNProvider, QueryBuilderShadCNContext };
+export { QueryBuilderShadCN, QueryBuilderShadCNContext };

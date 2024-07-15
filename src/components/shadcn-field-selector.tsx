@@ -21,8 +21,8 @@ import {
 } from "@radix-ui/react-icons";
 import { PopoverAnchor } from "@radix-ui/react-popover";
 import { CommandGroup } from "cmdk";
-import { cloneElement, isValidElement, ReactElement, useContext, useMemo, useState } from "react";
-import { FieldSelectorProps, FullField, getOption } from "react-querybuilder";
+import { useContext, useMemo, useState } from "react";
+import { FullField, getOption } from "react-querybuilder";
 
 export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 	const [open, setOpen] = useState(false);
