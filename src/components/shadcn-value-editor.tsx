@@ -12,6 +12,7 @@ import {
 	RadioGroupItem,
 	Label,
 	Switch,
+	DatePicker,
 } from "./ui";
 import { ComboboxOption } from "@/types/combobox";
 import { cn, toFullOptionList } from "@/lib/utils";
@@ -94,6 +95,13 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 				{separator}
 				{editors[1]}
 			</span>
+		);
+	}
+
+	console.log("inputType", inputType);
+	if (inputType?.indexOf("date") !== -1) {
+		return (
+			<DatePicker value={value} onChange={handleOnChange} placeholder="Select a Date..." />
 		);
 	}
 
