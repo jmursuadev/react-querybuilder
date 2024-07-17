@@ -67,7 +67,7 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 
 		return (
 			<Button
-				className="bg-input text-foreground min-w-content max-w-[300px] max-h-input hover:border-primary hover:border-input-placeholder hover:ring-1 hover:text-primary"
+				className="bg-input text-foreground min-w-content max-w-[300px] max-h-input hover:border-primary hover:border-input-placeholder hover:ring-1 hover:text-primary hover:!bg-input"
 				disabled={disabled}
 				data-testid={testID}
 			>

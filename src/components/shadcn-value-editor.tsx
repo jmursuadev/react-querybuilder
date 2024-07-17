@@ -98,10 +98,13 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 		);
 	}
 
-	console.log("inputType", inputType);
-	if (inputType?.indexOf("date") !== -1) {
+	if (inputTypeCoerced === "date") {
 		return (
-			<DatePicker value={value} onChange={handleOnChange} placeholder="Select a Date..." />
+			<DatePicker
+				value={value}
+				handleOnChange={handleOnChange}
+				placeholder="Select a Date..."
+			/>
 		);
 	}
 

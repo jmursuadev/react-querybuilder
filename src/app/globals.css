@@ -148,4 +148,8 @@
 		}
 	}
 	/* End of Inline Combinator for group top level component */
+
+	#calendar {
+		transition: height 200ms ease-out 0s;
+	}
 }
