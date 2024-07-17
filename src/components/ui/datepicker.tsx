@@ -7,23 +7,10 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "./calendar";
 import { Input } from "./input";
 import { Label } from "./label";
-import {
-	addDays,
-	addMonths,
-	addYears,
-	differenceInCalendarMonths,
-	format,
-	isValid,
-	parse,
-	startOfMonth,
-	startOfWeek,
-	subMonths,
-	subYears,
-} from "date-fns";
+import { addDays, format, isValid, startOfWeek, subMonths } from "date-fns";
 import {
 	CaptionProps,
 	useDayPicker,
-	useNavigation,
 	DayPickerProvider,
 	DayPickerProps,
 	NavigationProvider,
@@ -57,6 +44,19 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 		reset,
 		setSelected,
 	} = useInput({ format: "LLL dd, y" });
+
+	const debounceHandleInputChange = useMemo(
+		() =>
+			debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+				const val = e.target.value;
+				const parseDate = new Date(Date.parse(val));
+
+				if (isValid(parseDate)) {
+					setSelected(parseDate);
+				}
+			}, 1000),
+		[setSelected]
+	);
 
 	useEffect(() => {
 		let lastScrollTop = 0;
@@ -98,7 +98,7 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 
 			debounceHandleInputChange.cancel();
 		};
-	}, [open, month, numberOfMonths]);
+	}, [open, month, numberOfMonths, onMonthChange, debounceHandleInputChange]);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (inputOnChange) {
@@ -107,19 +107,6 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 
 		debounceHandleInputChange(e);
 	};
-
-	const debounceHandleInputChange = useMemo(
-		() =>
-			debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-				const val = e.target.value;
-				const parseDate = new Date(Date.parse(val));
-
-				if (isValid(parseDate)) {
-					setSelected(parseDate);
-				}
-			}, 1000),
-		[]
-	);
 
 	const handleApply = () => {
 		handleOnChange(format(selected as Date, "yyyy-MM-dd"));

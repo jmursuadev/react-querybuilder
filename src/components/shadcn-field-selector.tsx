@@ -148,7 +148,9 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 																value={option}
 																className="text-sm data-[state-active=true]:bg-primary data-[state-active=true]:text-primary-foreground data-[selected=true]:bg-primary-rgb-light data-[selected=true]:text-primary gap-2 w-min-content max-w-[300px] rounded-md"
 																onSelect={() => {
-																	setRecentField(option);
+																	if (setRecentField) {
+																		setRecentField(option);
+																	}
 																	handleOnChange(option.value);
 																	setOpen(false);
 																}}
@@ -194,14 +196,14 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 														<span>
 															Lorem Ipsum is simply dummy text of the
 															printing and typesetting industry. Lorem
-															Ipsum has been the industry's standard
-															dummy text ever since the 1500s, when an
-															unknown printer took a galley of type
-															and scrambled it to make a type specimen
-															book. It has survived not only five
-															centuries, but also the leap into
-															electronic typesetting, remaining
-															essentially unchanged. It was
+															Ipsum has been the industry&lsquo;s
+															standard dummy text ever since the
+															1500s, when an unknown printer took a
+															galley of type and scrambled it to make
+															a type specimen book. It has survived
+															not only five centuries, but also the
+															leap into electronic typesetting,
+															remaining essentially unchanged. It was
 															popularised in the 1960s with the
 															release of Letraset sheets containing
 															Lorem Ipsum passages, and more recently
