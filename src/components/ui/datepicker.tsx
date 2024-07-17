@@ -71,7 +71,12 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 				if (onMonthChange) {
 					setNumberOfMonths(numberOfMonths + 2);
 				}
-			} else if (target && month && currentScrollTop < lastScrollTop && currentScrollTop <= 20) {
+			} else if (
+				target &&
+				month &&
+				currentScrollTop < lastScrollTop &&
+				currentScrollTop <= 20
+			) {
 				if (onMonthChange) {
 					onMonthChange(subMonths(month, 1) as Date);
 					setNumberOfMonths(numberOfMonths + 1);
@@ -79,7 +84,7 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 				}
 			}
 
-			lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop
+			lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
 		}
 
 		setTimeout(() => {
@@ -134,7 +139,7 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 					onClick={() => setOpen(!open)}
 				>
 					<span className="overflow-hidden w-full text-ellipsis">
-						{value && value != "" ? value : placeholder}
+						{value && value != "" ? value : placeholder ?? inputPlaceholder}
 					</span>
 				</Button>
 			</PopoverTrigger>
