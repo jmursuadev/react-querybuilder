@@ -9,10 +9,13 @@ import {
 	RuleProps,
 	standardClassnames,
 	TestID,
-	update,
 	useRule,
 } from "react-querybuilder";
 
+/*
+ * This component is used to overwrite the rule component {@link Rule} with the combinator
+ * @param {RuleProps} r - The rule props
+ */
 export const ShadCNRule = memo((r: RuleProps) => {
 	// get the default control elements
 	const { rule: RuleControlElement, inlineCombinator: InlineCombinatorControlElement } =
@@ -69,6 +72,9 @@ export const ShadCNRule = memo((r: RuleProps) => {
 						schema={r.schema}
 					/>
 				)}
+			{/*
+			 * Append this element to the first rule component
+			 */}
 			{r.schema.independentCombinators &&
 				r.schema.showCombinatorsBetweenRules &&
 				r.path[1] === 0 && <span className="text-sm">where</span>}
