@@ -16,6 +16,9 @@ export interface UseComboBoxHandlerReturn {
 	selectedAll: boolean;
 }
 
+/*
+* Prepare all the values for the combobox {@link MultiCombobox}
+*/
 export const useComboboxHandler = (props: UseComboBoxHandlerProps): UseComboBoxHandlerReturn => {
 	const { value, isValueArray, handleOnChange, valueKey, options } = props;
 

@@ -8,8 +8,8 @@ import {
 	CommandList,
 	CommandItem,
 } from "@/components";
+import { useShadCN } from "@/hooks/useShadCN";
 import { cn } from "@/lib/utils";
-import { QueryBuilderShadCNContext } from "@/providers/qbshadcnprovider";
 import { ShadCNFieldSelectorProps } from "@/types";
 import {
 	CalendarIcon,
@@ -21,7 +21,7 @@ import {
 } from "@radix-ui/react-icons";
 import { PopoverAnchor } from "@radix-ui/react-popover";
 import { CommandGroup } from "cmdk";
-import { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { FullField, getOption } from "react-querybuilder";
 
 export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
@@ -33,20 +33,13 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 		disabled,
 		options,
 		handleOnChange,
-		title,
 		testID,
 		value,
-		operator,
 		className,
 		level,
-		path,
-		context,
-		validation,
-		schema,
-		rule,
 		triggerElement: TriggerElement,
 	} = allProps;
-	const { recentField, setRecentField } = useContext(QueryBuilderShadCNContext);
+	const { recentField, setRecentField } = useShadCN();
 	const valueOption = useMemo(() => getOption(options, value ?? ""), [options, value]);
 
 	const renderIcon = (opt: any, size: number = 15) => {
