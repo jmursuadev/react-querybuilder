@@ -8,7 +8,7 @@ import {
 	ShadCNCombinatorSelector,
 } from "@/components";
 import { TrashIcon } from "@/components/icons";
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 import {
 	ControlElementsProp,
 	FullField,

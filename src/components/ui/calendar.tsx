@@ -17,7 +17,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
 			classNames={{
 				months: "months flex flex-col sm:flex-col sm:mt-4 sm:space-y-0 [&>div:last-child]:sm:!mb-0",
 				month: "month flex flex-col p-0 !pl-0 !mx-0 mb-5 sm:!mb-3 !h-[252px]",
-				caption: "flex justify-center pt-1 relative items-center flex-row w-max" ,
+				caption: "flex justify-center pt-1 relative items-center flex-row w-max",
 				caption_label: "text-sm font-medium",
 				nav: "space-x-1 flex items-center",
 				nav_button: cn(
@@ -32,7 +32,7 @@ function Calendar({ className, classNames, showOutsideDays = true, ...props }: C
 				row: "flex w-full mt-0",
 				cell: "h-9 w-9 text-center text-[13px] font-normal p-0 relative [&:has([aria-selected].day-range-end)]:!rounded-full [&:has([aria-selected].day-outside)]:bg-accent/50 [&:has([aria-selected])]:bg-transparent [&:has([aria-selected])]:rounded-full first:[&:has([aria-selected])]:!rounded-full [&:has([aria-selected])]:!text-foreground last:[&:has([aria-selected])]!rounded-full focus-within:relative focus-within:z-20",
 				day: cn(
-					"h-9 w-9 p-0 font-normal aria-selected:opacity-100 hover:border-primary rounded-full !bg-transparent",
+					"h-9 w-9 p-0 font-normal aria-selected:opacity-100 hover:border-primary rounded-full !bg-transparent"
 				),
 				day_range_end: "day-range-end",
 				day_selected:

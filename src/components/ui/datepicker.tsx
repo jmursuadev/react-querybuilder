@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { cloneElement, createRef, memo, use, useEffect, useMemo, useRef } from "react";
 import { DatepickerProps } from "@/types";
 import { Button } from "./button";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
@@ -7,16 +7,19 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "./calendar";
 import { Input } from "./input";
 import { Label } from "./label";
-import { addDays, format, isValid, startOfWeek, subMonths } from "date-fns";
+import { addDays, addMonths, format, isValid, startOfWeek, subMonths } from "date-fns";
 import {
 	CaptionProps,
-	useDayPicker,
 	DayPickerProvider,
 	DayPickerProps,
 	NavigationProvider,
 	useInput,
+	useNavigation,
 } from "react-day-picker";
-import { debounce, last, set } from "lodash";
+import { debounce, first, set } from "lodash";
+import { ShadCNDayPickerProvider } from "@/contexts/daypicker/shadcn-daypicker-context";
+import { useDayPicker } from "@/hooks/useDayPicker";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const weekLabels = Array.from({ length: 7 }, (_, i) => {
 	return format(addDays(startOfWeek(new Date(), { weekStartsOn: 1 }), i), "EEEEEE");
@@ -29,9 +32,10 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 	handleOnChange,
 	...props
 }) => {
-	const daypicker = useDayPicker();
 	const [open, setOpen] = React.useState<boolean>(false);
-	const [numberOfMonths, setNumberOfMonths] = React.useState<number>(daypicker.numberOfMonths);
+	const daypickerRef = createRef<HTMLDivElement>();
+	const nav = useNavigation();
+	const { numberOfMonths, setNumberOfMonths, ...daypicker } = useDayPicker();
 
 	const {
 		dayPickerProps: { month, onDayClick, onMonthChange, selected },
@@ -59,46 +63,8 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 	);
 
 	useEffect(() => {
-		let lastScrollTop = 0;
-
-		function handleScroll(e: Event) {
-			const target = e.target as HTMLElement;
-			const clientHeight = target.clientHeight;
-			const threshold = target.scrollHeight - clientHeight;
-			const currentScrollTop = target.scrollTop;
-
-			if (target && month && threshold <= currentScrollTop + 50) {
-				if (onMonthChange) {
-					setNumberOfMonths(numberOfMonths + 2);
-				}
-			} else if (
-				target &&
-				month &&
-				currentScrollTop < lastScrollTop &&
-				currentScrollTop <= 20
-			) {
-				if (onMonthChange) {
-					onMonthChange(subMonths(month, 1) as Date);
-					setNumberOfMonths(numberOfMonths + 1);
-					target.scrollTop = 270;
-				}
-			}
-
-			lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-		}
-
-		setTimeout(() => {
-			document
-				.getElementById("calendar")
-				?.addEventListener("scroll", handleScroll, { passive: true });
-		}, 500);
-
-		return () => {
-			document.getElementById("calendar")?.removeEventListener("scroll", handleScroll);
-
-			debounceHandleInputChange.cancel();
-		};
-	}, [open, month, numberOfMonths, onMonthChange, debounceHandleInputChange]);
+		return () => debounceHandleInputChange.cancel();
+	}, [debounceHandleInputChange]);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (inputOnChange) {
@@ -131,13 +97,16 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 				</Button>
 			</PopoverTrigger>
 			<PopoverContent
-				className="w-full p-0"
+				className="w-full p-0 overflow-hidden"
 				align="start"
 				onInteractOutside={() => setOpen(false)}
 				asChild
 			>
 				<div>
-					<div className="popover-header border-outline border-b px-4 pt-3 pb-0 flex flex-col gap-1">
+					<div
+						className="popover-header border-outline border-b px-4 pt-3 pb-0 flex flex-col gap-1 relative bg-white"
+						style={{ zIndex: 1 }}
+					>
 						<div className="flex items-center gap-2">
 							<Label htmlFor="input-date">Start</Label>
 							<Input
@@ -157,22 +126,23 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 							))}
 						</div>
 					</div>
-					<div className="max-h-[300px] overflow-y-auto p-[10px]" id="calendar">
-						<Calendar
-							selected={selected}
-							onDayClick={onDayClick}
-							onMonthChange={onMonthChange}
-							className={daypicker.className}
-							showOutsideDays={daypicker.showOutsideDays}
-							numberOfMonths={numberOfMonths}
-							weekStartsOn={daypicker.weekStartsOn}
-							classNames={{
-								head_cell: daypicker.classNames.head_cell,
-							}}
-							components={daypicker.components}
-							month={month}
-						/>
-					</div>
+					<Calendar
+						{...daypicker}
+						mode="default"
+						selected={selected}
+						onDayClick={onDayClick}
+						onMonthChange={onMonthChange}
+						className={cn(daypicker.className, "[&>.months]:!flex-col-reverse !p-3")}
+						showOutsideDays={daypicker.showOutsideDays}
+						weekStartsOn={daypicker.weekStartsOn}
+						classNames={{
+							head_cell: daypicker.classNames.head_cell,
+						}}
+						numberOfMonths={numberOfMonths}
+						components={daypicker.components}
+						month={month}
+						reverseMonths={true}
+					/>
 					<div className="popover-footer flex justify-end gap-2 p-2 border border-t border-outline">
 						<Button variant="ghost" size="sm" onClick={() => setOpen(false)}>
 							Cancel
@@ -193,8 +163,50 @@ const CustomCaption = ({ displayMonth }: CaptionProps) => {
 	);
 };
 
+const Months = ({ children }: { children: React.ReactNode }) => {
+	const { numberOfMonths, setNumberOfMonths } = useDayPicker();
+	const { goToMonth, currentMonth } = useNavigation();
+
+	return (
+		<div
+			id="calendar-months"
+			className={cn(
+				"months flex flex-col sm:flex-col sm:mt-4 sm:space-y-0 [&>div:last-child]:sm:!mb-0 flex-col-reverse overflow-auto max-h-[300px]"
+			)}
+		>
+			<InfiniteScroll
+				className="flex flex-col-reverse h-auto"
+				style={{
+					display: "flex",
+					flexDirection: "column-reverse",
+				}}
+				dataLength={children && Array.isArray(children) ? children.length : 0}
+				hasMore={true}
+				next={() => {
+					setNumberOfMonths(numberOfMonths + 2);
+					goToMonth(subMonths(currentMonth, 2));
+				}}
+				loader={<span className="hidden">Loadding...</span>}
+				onScroll={(e) => {
+					const target = e.target as HTMLElement;
+
+					if (target.scrollTop === 0) {
+						goToMonth(addMonths(currentMonth, 1));
+						target.scrollTop = -252;
+					}
+				}}
+				scrollableTarget="calendar-months"
+				inverse={true}
+			>
+				{children}
+			</InfiniteScroll>
+		</div>
+	);
+};
+
 const customComponents = {
 	Caption: CustomCaption,
+	Months,
 };
 
 const daypickerProps = {
@@ -212,7 +224,9 @@ const DatePicker = (props: DatepickerProps) => {
 	return (
 		<DayPickerProvider initialProps={{ ...daypickerProps, onSelect: props.handleOnChange }}>
 			<NavigationProvider>
-				<BaseDatePicker {...props} />
+				<ShadCNDayPickerProvider>
+					<BaseDatePicker {...props} />
+				</ShadCNDayPickerProvider>
 			</NavigationProvider>
 		</DayPickerProvider>
 	);

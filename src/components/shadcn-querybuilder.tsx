@@ -1,4 +1,4 @@
-import { QueryBuilderShadCN } from "@/providers/qbshadcnprovider";
+import { QueryBuilderShadCN } from "@/contexts/qb-shadcn-context";
 import { useEffect, useState } from "react";
 import QueryBuilder, { add, generateID, RuleGroupTypeIC } from "react-querybuilder";
 import { QueryBuilderDnD } from "@react-querybuilder/dnd";

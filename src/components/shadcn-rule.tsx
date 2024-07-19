@@ -14,7 +14,7 @@ import {
 
 /*
  * This component is used to overwrite the rule component {@link Rule} with the combinator
- * @param {RuleProps} r - The rule props
+ * @param {@link RuleProps} r - The rule props
  */
 export const ShadCNRule = memo((r: RuleProps) => {
 	// get the default control elements

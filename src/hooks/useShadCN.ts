@@ -1,4 +1,4 @@
-import { QueryBuilderShadCNContext } from "@/providers/qbshadcnprovider";
+import { QueryBuilderShadCNContext } from "@/contexts/qb-shadcn-context";
 import { useContext } from "react";
 
 /*

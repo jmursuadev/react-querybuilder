@@ -11,7 +11,7 @@ import {
 import { ShadCNAddRule } from "@/components";
 
 /**
- * Extended RuleGroup component
+ * Overwrite RuleGroup component
  * Default component to display {@link RuleGroupType} and {@link RuleGroupTypeIC}
  * objects. This is actually a small wrapper around {@link RuleGroupHeaderComponents}
  * and {@link RuleGroupBodyComponents}.
