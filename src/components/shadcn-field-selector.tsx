@@ -46,7 +46,9 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 	const valueOption = useMemo(() => getOption(options, value ?? ""), [options, value]);
 
 	const renderIcon = (opt: any, size: number = 15) => {
-		switch (opt.inputType) {
+		if (!opt) return null;
+
+		switch (opt.inputType ?? opt.type) {
 			case "datetime-local":
 			case "date":
 				return <CalendarIcon width={size} height={size} />;

@@ -139,14 +139,18 @@ const Select = React.forwardRef<
 		options: any[];
 		className?: string;
 		selectorContentClassName?: string;
+		testID?: string;
+		title?: string;
 	},
 	React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> & {
 		placeholder?: string;
 		options: any[];
 		className?: string;
 		selectorContentClassName?: string;
+		testID?: string;
+		title?: string;
 	}
->(({ options, className, selectorContentClassName, ...props }, ref) => {
+>(({ options, className, selectorContentClassName, testID, title, ...props }, ref) => {
 	const renderOption = (opt: FullOption): JSX.Element | JSX.Element[] => {
 		if (opt.options && Array.isArray(opt.options) && options.length > 0) {
 			return (
@@ -167,6 +171,8 @@ const Select = React.forwardRef<
 	return (
 		<BaseSelect {...props}>
 			<SelectTrigger
+				title={title}
+				data-testid={testID}
 				data-value={props.value}
 				ref={ref}
 				className={cn("h-input max-h-input", className)}

@@ -69,7 +69,8 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 	};
 
 	const renderValue = () => {
-		return valueArray.map((val: any) => (isObject(val) ? val[labelKey] : val)).join(", ");
+		console.log(valueArray);
+		return valueArray.map((val: any) => (isObject(val) ? val[labelKey] : val)).join(",");
 	};
 
 	return (

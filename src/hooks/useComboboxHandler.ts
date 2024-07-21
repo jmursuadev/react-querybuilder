@@ -17,13 +17,15 @@ export interface UseComboBoxHandlerReturn {
 }
 
 /*
-* Prepare all the values for the combobox {@link MultiCombobox}
-*/
+ * Prepare all the values for the combobox {@link MultiCombobox}
+ */
 export const useComboboxHandler = (props: UseComboBoxHandlerProps): UseComboBoxHandlerReturn => {
 	const { value, isValueArray, handleOnChange, valueKey, options } = props;
 
 	// useMemo is used to memoize the valueArray
 	const valueArray = useMemo(() => {
+		if (!value) return [];
+
 		return isValueArray ? value : !Array.isArray(value) ? value.split(",") : value;
 	}, [value, isValueArray]);
 
