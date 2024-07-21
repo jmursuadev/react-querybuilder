@@ -76,6 +76,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 
 			return (
 				<SelectorComponent
+					title={title}
 					{...props}
 					data-testid={testID}
 					key={key}
@@ -112,6 +113,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 		case "multiselect":
 			return (
 				<MultiCombobox
+					title={title}
 					data-testid={testID}
 					placeholder="Select..."
 					onChange={handleOnChange}
@@ -119,6 +121,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 					value={value}
 					isValueArray={listsAsArrays}
 					className={className}
+					disabled={disabled}
 				/>
 			);
 		case "select":

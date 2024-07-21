@@ -23,6 +23,8 @@ export interface ComboboxBaseProps {
 	labelKey?: string;
 	valueKey?: string;
 	className?: string;
+	disabled?: boolean;
+	title?: string;
 }
 
 export interface ComboboxProps extends ComboboxBaseProps {

@@ -24,6 +24,9 @@ import { CommandGroup } from "cmdk";
 import { useMemo, useState } from "react";
 import { FullField, getOption } from "react-querybuilder";
 
+/**
+ * Overwrite `<select>` component used by {@link QueryBuilder} in Field Selector.
+ */
 export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 	const [open, setOpen] = useState(false);
 	const [subPopoverOpen, setSubPopoverOpen] = useState(false);
@@ -45,6 +48,7 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 	const renderIcon = (opt: any, size: number = 15) => {
 		switch (opt.inputType) {
 			case "datetime-local":
+			case "date":
 				return <CalendarIcon width={size} height={size} />;
 			case "time":
 				return <TimerIcon width={size} height={size} />;
@@ -122,7 +126,7 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 														Recents
 													</span>
 													<span className="text-sm flex items-center leading-none gap-2">
-														<LetterCaseCapitalizeIcon width={18} />{" "}
+														{renderIcon(recentField, 18)}{" "}
 														{recentField && recentField.label}
 													</span>
 												</div>

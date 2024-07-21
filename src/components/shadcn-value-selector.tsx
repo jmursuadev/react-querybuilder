@@ -1,6 +1,10 @@
 import { toFullOptionList, useValueSelector, ValueSelectorProps } from "react-querybuilder";
 import { Select } from "@/components";
 
+/**
+ * Overwrite `<select>` component used by {@link QueryBuilder}.
+ */
+
 export const ShadCNValueSelector = (
 	allProps: ValueSelectorProps & { selectorContentClassName?: string }
 ) => {

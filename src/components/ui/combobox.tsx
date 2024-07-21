@@ -56,8 +56,9 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 
 		return (
 			<CommandItem
-				key={opt.value}
-				value={opt.value}
+				data-value={opt[valueKey]}
+				key={opt[valueKey]}
+				value={opt[valueKey]}
 				onSelect={comboboxOnChange}
 				className={cn("gap-2", "[&>.checkbox-wrapper]:hover:ring")}
 			>
@@ -75,6 +76,8 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
 				<Button
+					{...props}
+					data-value={value}
 					variant="outline"
 					size="sm"
 					className={cn(
@@ -100,6 +103,7 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 					<CommandList>
 						<CommandGroup>
 							<CommandItem
+								data-value="donotfilter-all"
 								key={"all"}
 								value={"donotfilter-all"}
 								onSelect={comboboxOnChange}
