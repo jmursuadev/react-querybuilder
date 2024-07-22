@@ -128,6 +128,7 @@ export const ShadCNValueEditor = (allProps: ValueEditorProps) => {
 			return (
 				<SelectorComponent
 					{...props}
+					testID={testID}
 					data-testid={testID}
 					className={className}
 					disabled={disabled}
