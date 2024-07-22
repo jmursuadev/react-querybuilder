@@ -13,7 +13,7 @@ import {
 } from "@/components";
 import { ComboboxOption, ComboboxValue, MultiComboboxProps } from "@/types/combobox";
 import { useState, FC } from "react";
-import { cn, isObject, toggleValueInArray } from "@/lib/utils";
+import { cn, isObject } from "@/lib/utils";
 import { FullOption, toFlatOptionArray } from "react-querybuilder";
 import { useComboboxHandler } from "@/hooks/useComboboxHandler";
 
@@ -56,6 +56,7 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 
 		return (
 			<CommandItem
+				cmdk-value={opt[valueKey]}
 				data-value={opt[valueKey]}
 				key={opt[valueKey]}
 				value={opt[valueKey]}
@@ -69,7 +70,6 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 	};
 
 	const renderValue = () => {
-		console.log(valueArray);
 		return valueArray.map((val: any) => (isObject(val) ? val[labelKey] : val)).join(",");
 	};
 
@@ -104,6 +104,7 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 					<CommandList>
 						<CommandGroup>
 							<CommandItem
+								cmdk-value="donotfilter-all"
 								data-value="donotfilter-all"
 								key={"all"}
 								value={"donotfilter-all"}
@@ -118,7 +119,7 @@ const MultiCombobox: FC<MultiComboboxProps> = ({
 						<CommandGroup>
 							{options &&
 								options.length > 0 &&
-								options.map((opt) => renderOption(opt))}
+								options.map((opt:any) => renderOption(opt))}
 						</CommandGroup>
 					</CommandList>
 				</Command>
