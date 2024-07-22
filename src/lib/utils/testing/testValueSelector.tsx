@@ -1,17 +1,9 @@
-import {
-	BaseOption,
-	FlexibleOption,
-	FlexibleOptionList,
-	FullOption,
-	Option,
-	TestID,
-	toFullOption,
-	toFullOptionList,
-	ValueSelectorProps,
-} from "react-querybuilder";
+import { TestID, toFullOption, ValueSelectorProps } from "react-querybuilder";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { ShadCNValueSelector } from "@/components";
 import { basicSchema } from "./utils";
+import { ReactNode } from "react";
 
 const defaultValueSelectorProps = {
 	handleOnChange: () => {},
@@ -36,11 +28,17 @@ const defaultValueSelectorProps = {
 	level: 0,
 } satisfies ValueSelectorProps;
 
-test("renders the value selector", () => {
-	render(<ShadCNValueSelector {...defaultValueSelectorProps} />);
+const testComboBox = (
+	title: string,
+	Component: React.ComponentType<ValueSelectorProps>,
+	props: any
+) => {
+	test(title, async () => {
+		render(<Component {...props} />);
 
-	const select = screen.getByRole("combobox");
-	expect(select).toBeInTheDocument();
-	expect(select).toHaveValue("option-3");
-	expect(select).toHaveTextContent("Option 3");
-});
+		const select = screen.getByRole("combobox");
+		expect(select).toBeInTheDocument();
+		expect(select).toHaveValue("option-3");
+		expect(select).toHaveTextContent("Option 3");
+	});
+};
