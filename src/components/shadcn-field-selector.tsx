@@ -7,7 +7,7 @@ import {
 	Button,
 	CommandList,
 	CommandItem,
-} from "@/components";
+} from "@ui";
 import { useShadCN } from "@/hooks/useShadCN";
 import { cn } from "@/lib/utils";
 import { ShadCNFieldSelectorProps } from "@/types";
@@ -27,7 +27,7 @@ import { FullField, getOption } from "react-querybuilder";
 /**
  * Overwrite `<select>` component used by {@link QueryBuilder} in Field Selector.
  */
-export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
+const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 	const [open, setOpen] = useState(false);
 	const [subPopoverOpen, setSubPopoverOpen] = useState(false);
 	const [hoverField, setHoverField] = useState<FullField | null>(null);
@@ -245,3 +245,5 @@ export const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 		</>
 	);
 };
+
+export { ShadCNFieldSelector };

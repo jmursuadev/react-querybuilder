@@ -1,11 +1,16 @@
+import React from 'react';
 import { shadcnControlElements } from "@/contexts/qb-shadcn-context";
 import { Classnames, defaultCombinators, FullField, Schema } from "react-querybuilder";
+import { initialDayPickerProps } from "@ui";
+import { render, RenderOptions } from "@testing-library/react";
+import { ReactNode } from "react";
+import { DayPickerProvider, NavigationProvider } from "react-day-picker";
 
 const admonish = (fn: string) => () => {
 	throw new Error(`Implement schema.${fn} for this test.`);
 };
 
-export const basicSchema: Schema<FullField, string> = {
+const basicSchema: Schema<FullField, string> = {
 	qbId: "qbId",
 	fields: [],
 	fieldMap: {},
@@ -40,3 +45,17 @@ export const basicSchema: Schema<FullField, string> = {
 	parseNumbers: false,
 	disabledPaths: [],
 };
+
+const Providers = ({ children }: { children: ReactNode }) => {
+	return (
+		<DayPickerProvider initialProps={initialDayPickerProps}>
+			<NavigationProvider>{children}</NavigationProvider>
+		</DayPickerProvider>
+	);
+};
+
+const customRender = (ui: ReactNode, options?: Omit<RenderOptions, "wrapper">) =>
+	render(ui, { wrapper: Providers, ...options });
+
+export * from "@testing-library/react";
+export { customRender as render, basicSchema };

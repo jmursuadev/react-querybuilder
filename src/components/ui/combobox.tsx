@@ -10,7 +10,7 @@ import {
 	CommandItem,
 	CommandGroup,
 	Checkbox,
-} from "@/components";
+} from "@ui";
 import { ComboboxOption, ComboboxValue, MultiComboboxProps } from "@/types/combobox";
 import { useState, FC } from "react";
 import { cn, isObject } from "@/lib/utils";

@@ -1,11 +1,11 @@
 import { ShadCNFieldSelectorProps } from "@/types";
 import { ShadCNFieldSelector } from "./shadcn-field-selector";
-import { Button, ButtonProps } from "./ui";
+import { Button, ButtonProps } from "@ui";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { forwardRef } from "react";
 import { ActionWithRulesAndAddersProps, add, getOption, toArray } from "react-querybuilder";
 
-export const ShadCNAddRule = (props: ActionWithRulesAndAddersProps) => {
+const ShadCNAddRule = (props: ActionWithRulesAndAddersProps) => {
 	const { schema, path } = props;
 	const { dispatchQuery } = schema;
 
@@ -44,3 +44,5 @@ export const ShadCNAddRule = (props: ActionWithRulesAndAddersProps) => {
 
 	return <ShadCNFieldSelector {...selectorProps} triggerElement={TriggerElement} />;
 };
+
+export { ShadCNAddRule };

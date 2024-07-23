@@ -1,3 +1,5 @@
 import '@testing-library/jest-dom';
 
-if (typeof Element !== 'undefined') Element.prototype.scrollIntoView = jest.fn();
+window.HTMLElement.prototype.scrollIntoView = jest.fn();
+window.HTMLElement.prototype.hasPointerCapture = jest.fn();
+window.HTMLElement.prototype.releasePointerCapture = jest.fn();

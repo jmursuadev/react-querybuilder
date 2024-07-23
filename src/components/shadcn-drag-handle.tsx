@@ -6,7 +6,7 @@ import {
 	isRuleGroupTypeIC,
 } from "react-querybuilder";
 
-export const ShadCNDragHandle = forwardRef<HTMLSpanElement, DragHandleProps>((props, ref) => {
+const ShadCNDragHandle = forwardRef<HTMLSpanElement, DragHandleProps>((props, ref) => {
 	const { ruleOrGroup } = props;
 	const { dragHandle: DragHandle } = defaultControlElements;
 
@@ -22,3 +22,5 @@ export const ShadCNDragHandle = forwardRef<HTMLSpanElement, DragHandleProps>((pr
 	return null;
 });
 ShadCNDragHandle.displayName = "ShadCNDragHandle";
+
+export { ShadCNDragHandle };

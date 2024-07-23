@@ -1,5 +1,6 @@
+import React from "react";
 import { toFullOptionList, useValueSelector, ValueSelectorProps } from "react-querybuilder";
-import { Select } from "@/components";
+import { Select } from "@ui";
 
 /**
  * Overwrite `<select>` component used by {@link QueryBuilder}.

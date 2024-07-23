@@ -33,8 +33,6 @@ const BaseDatePicker: React.FC<DatepickerProps> = ({
 	...props
 }) => {
 	const [open, setOpen] = React.useState<boolean>(false);
-	const daypickerRef = createRef<HTMLDivElement>();
-	const nav = useNavigation();
 	const { numberOfMonths, setNumberOfMonths, ...daypicker } = useDayPicker();
 
 	const {
@@ -209,7 +207,7 @@ const customComponents = {
 	Months,
 };
 
-const daypickerProps = {
+const initialDayPickerProps = {
 	className: "w-full !p-0 !m-0",
 	showOutsideDays: false,
 	numberOfMonths: 12,
@@ -222,7 +220,9 @@ const daypickerProps = {
 
 const DatePicker = (props: DatepickerProps) => {
 	return (
-		<DayPickerProvider initialProps={{ ...daypickerProps, onSelect: props.handleOnChange }}>
+		<DayPickerProvider
+			initialProps={{ ...initialDayPickerProps, onSelect: props.handleOnChange }}
+		>
 			<NavigationProvider>
 				<ShadCNDayPickerProvider>
 					<BaseDatePicker {...props} />
@@ -232,4 +232,4 @@ const DatePicker = (props: DatepickerProps) => {
 	);
 };
 
-export { DatePicker };
+export { DatePicker, initialDayPickerProps };

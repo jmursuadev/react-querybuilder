@@ -13,7 +13,7 @@ import {
 	Label,
 	Switch,
 	DatePicker,
-} from "./ui";
+} from "@ui";
 import { ComboboxOption } from "@/types/combobox";
 import { cn, toFullOptionList } from "@/lib/utils";
 

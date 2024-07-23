@@ -5,7 +5,7 @@ import { QueryBuilderDnD } from "@react-querybuilder/dnd";
 import * as ReactDnD from "react-dnd";
 import * as ReactDndHtml5Backend from "react-dnd-html5-backend";
 import fields from "@/data/fields";
-import { Button } from "@/components";
+import { Button } from "@ui";
 import { PlusIcon } from "@radix-ui/react-icons";
 import "react-querybuilder/dist/query-builder.scss";
 

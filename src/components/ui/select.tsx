@@ -151,6 +151,8 @@ const Select = React.forwardRef<
 		title?: string;
 	}
 >(({ options, className, selectorContentClassName, testID, title, ...props }, ref) => {
+	const [open, setOpen] = React.useState(false);
+
 	const renderOption = (opt: FullOption): JSX.Element | JSX.Element[] => {
 		if (opt.options && Array.isArray(opt.options) && options.length > 0) {
 			return (
@@ -162,7 +164,7 @@ const Select = React.forwardRef<
 		}
 
 		return (
-			<SelectItem value={opt.value} key={opt.value}>
+			<SelectItem value={opt.value} key={opt.value} data-value={opt.value}>
 				{opt.label}
 			</SelectItem>
 		);
@@ -171,6 +173,7 @@ const Select = React.forwardRef<
 	return (
 		<BaseSelect {...props}>
 			<SelectTrigger
+				onClick={() => setOpen((prev) => !prev)}
 				title={title}
 				data-testid={testID}
 				data-value={props.value}

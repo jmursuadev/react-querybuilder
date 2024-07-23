@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ValueSelectorProps } from "react-querybuilder";
 
-export const ShadCNCombinatorSelector = (allProps: ValueSelectorProps) => {
+const ShadCNCombinatorSelector = (allProps: ValueSelectorProps) => {
 	const {
 		schema: {
 			controls: { valueSelector: ValueSelectorControlElement },
@@ -18,3 +18,5 @@ export const ShadCNCombinatorSelector = (allProps: ValueSelectorProps) => {
 
 	return <ValueSelectorControlElement {...allProps} className={cn(className, value)} />;
 };
+
+export { ShadCNCombinatorSelector };

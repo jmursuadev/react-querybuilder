@@ -1,6 +1,7 @@
 import { TestID, toFullOption, ValueSelectorProps } from "react-querybuilder";
-import { render, screen } from "@testing-library/react";
+import { getByRole, getByText, queryByAttribute, render, screen } from "@test-utils";
 import "@testing-library/jest-dom";
+import userEvent from "@testing-library/user-event";
 import { basicSchema } from "./utils";
 
 const defaultValueSelectorProps = {
@@ -31,16 +32,37 @@ const testComboBox = (
 	Component: React.ComponentType<ValueSelectorProps>,
 	props: any
 ) => {
-	test(`${title} is rendered correctly`, async () => {
+	test(`${title} and value is rendered correctly`, async () => {
 		render(<Component {...props} />);
 
-		const select = screen.getByTestId(TestID.valueSourceSelector);
+		const user = userEvent.setup();
+
+		const select = await screen.getByTestId(TestID.valueSourceSelector);
 		expect(select).toBeInTheDocument();
-		// expect(select).toHaveValue("option-3");
-		// expect(select).toHaveTextContent("Option 3");
+
+		await user.click(select);
+
+		/**
+		 * Check if the content popover is visible
+		 */
+		const selectWrapper = await document.querySelector(
+			"div[data-radix-popper-content-wrapper]"
+		);
+		expect(selectWrapper).toBeInTheDocument();
+
+		if (!selectWrapper) {
+			throw new Error("Select wrapper not found");
+		}
+
+		/**
+		 * Check if the item is selected correctly
+		 */
+		const selectItem = getByText(selectWrapper as HTMLElement, "Option 3");
+		await user.click(selectItem);
+		expect(select).toHaveTextContent("Option 3");
 	});
 };
 
-export const testValueSelector = (Component: React.ComponentType<ValueSelectorProps>) => {
+export const testValueSelector = function (Component: React.ComponentType<ValueSelectorProps>) {
 	testComboBox("Value Selector", Component, defaultValueSelectorProps);
 };
