@@ -92,7 +92,7 @@ const ShadCNFieldSelector = (allProps: ShadCNFieldSelectorProps) => {
 						{renderTrigger()}
 					</PopoverTrigger>
 					<PopoverContent
-						className="p-0 w-full"
+						className="p-0 w-full field-selector-content"
 						side="bottom"
 						align="start"
 						onInteractOutside={() => setOpen(false)}

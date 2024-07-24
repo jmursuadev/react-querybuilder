@@ -1,5 +1,5 @@
 import { TestID, toFullOption, ValueSelectorProps } from "react-querybuilder";
-import { getByRole, getByText, queryByAttribute, render, screen } from "@test-utils";
+import { getByText, render, screen } from "@test-utils";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import { basicSchema } from "./utils";
@@ -27,7 +27,7 @@ const defaultValueSelectorProps = {
 	level: 0,
 } satisfies ValueSelectorProps;
 
-const testComboBox = (
+const testSelect = (
 	title: string,
 	Component: React.ComponentType<ValueSelectorProps>,
 	props: any
@@ -64,5 +64,5 @@ const testComboBox = (
 };
 
 export const testValueSelector = function (Component: React.ComponentType<ValueSelectorProps>) {
-	testComboBox("Value Selector", Component, defaultValueSelectorProps);
+	testSelect("Value Selector", Component, defaultValueSelectorProps);
 };

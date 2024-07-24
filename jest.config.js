@@ -25,5 +25,6 @@ module.exports = {
 		"^@types/(.*)$": "<rootDir>/src/types/$1",
 		"\\.(css|less|scss|sass)$": "identity-obj-proxy", // Mock CSS imports
 		"\\.(jpg|jpeg|png|gif|webp|svg)$": "<rootDir>/__mocks__/fileMock.js", // Mock static files
+		'use-resize-observer': 'use-resize-observer/polyfilled'
 	},
 };
