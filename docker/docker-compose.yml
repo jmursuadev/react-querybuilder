@@ -1,0 +1,38 @@
+name: react-querybuilder
+services:
+  rqb_db:
+    container_name: rqb_db
+    platform: linux/amd64 #for platform error on Apple M1 chips
+    restart: unless-stopped
+    image: library/postgres:14
+    environment:
+      POSTGRES_USER: rqb
+      POSTGRES_PASSWORD: rqb
+      POSTGRES_DB: rqb
+    volumes:
+      - rqb-data:/var/lib/postgresql/data/
+    ports:
+      - "54322:5432"
+    networks:
+      - rqb-network
+
+  rqb_pgadmin:
+    image: dpage/pgadmin4
+    container_name: rqb_pgadmin
+    ports:
+      - "5050:80"
+    depends_on:
+      - rqb_db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@email.com
+      PGADMIN_DEFAULT_PASSWORD: password
+    networks:
+      - rqb-network
+
+volumes:
+  rqb-data:
+
+networks:
+  rqb-network:
+    name: rqb-network
+    driver: bridge

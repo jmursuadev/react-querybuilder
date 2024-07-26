@@ -34,6 +34,7 @@ export default function Home() {
 				<ShadCNQueryBuilder />
 			</ClientOnly>
 			<DynamicTable classNameWrapper="max-h-[600px]" fields={fields} data={sampleData} />
+
 		</main>
 	);
 }

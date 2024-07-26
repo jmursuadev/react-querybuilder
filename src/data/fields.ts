@@ -165,13 +165,13 @@ export default function fields() {
 	return (
 		[
 			{
-				name: "firstName",
+				name: "first_name",
 				label: "First Name",
 				placeholder: "Enter first name",
 				validator,
 			},
 			{
-				name: "lastName",
+				name: "last_name",
 				label: "Last Name",
 				placeholder: "Enter last name",
 				defaultOperator: "beginsWith",
@@ -179,7 +179,7 @@ export default function fields() {
 			},
 			{ name: "age", label: "Age", inputType: "number", validator },
 			{
-				name: "isMusician",
+				name: "is_musician",
 				label: "Is a musician (Switch)",
 				valueEditorType: "switch",
 				operators: defaultOperators.filter((op) => op.name === "="),
@@ -201,7 +201,7 @@ export default function fields() {
 				operators: defaultOperators.filter((op) => op.name === "="),
 			},
 			{
-				name: "alsoPlays",
+				name: "also_plays",
 				label: "Also plays",
 				valueEditorType: "multiselect",
 				values: musicalInstruments,

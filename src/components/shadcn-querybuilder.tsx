@@ -1,6 +1,6 @@
 import { QueryBuilderShadCN } from "@/contexts/qb-shadcn-context";
 import { useEffect, useState } from "react";
-import QueryBuilder, { add, generateID, RuleGroupTypeIC } from "react-querybuilder";
+import QueryBuilder, { add, formatQuery, generateID, RuleGroupTypeIC, useQueryBuilderQuery } from "react-querybuilder";
 import { QueryBuilderDnD } from "@react-querybuilder/dnd";
 import * as ReactDnD from "react-dnd";
 import * as ReactDndHtml5Backend from "react-dnd-html5-backend";
@@ -60,6 +60,8 @@ const ShadCNQueryBuilder = () => {
 							<Button>Save as</Button>
 						</div>
 					</div>
+
+					SELECT * FROM public.users WHERE {formatQuery(query, 'sql')}
 				</div>
 			</QueryBuilderDnD>
 		</QueryBuilderShadCN>

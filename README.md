@@ -31,6 +31,33 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Test Query
+
+You can install the postgresql dockerize I created.
+
+### Installation
+
+Go to directory ```docker```. You must have Docker Desktop installed in your machine. You can download it [here](https://www.docker.com/products/docker-desktop/).
+
+After you installed the Docker Desktop. Run the command below:
+
+```bash
+docker compose up -d
+```
+
+- Access the pgAdmin browser: http://localhost:5050/browser/
+- You can log in using this credentials:
+```Username: admin@email.com```
+```Password: password```
+- Create New Server: Complete Documentation for pgAdmin: https://www.pgadmin.org/docs/pgadmin4/8.9/server_dialog.html
+
+Credentials for pgAdmin:
+
+User: ```rqb```<br/>
+Password: ```rqb```<br/>
+Database: ```rqb```<br/>
+Host name: ```rqb_data```<br/>
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
