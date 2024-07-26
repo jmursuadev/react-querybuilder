@@ -58,6 +58,8 @@ Password: ```rqb```<br/>
 Database: ```rqb```<br/>
 Host name: ```rqb_data```<br/>
 
+I've prepared some dummy data for you. You can find it in the base directory under the filename ***sqldump.sql***
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
