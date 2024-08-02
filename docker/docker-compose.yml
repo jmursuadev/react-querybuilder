@@ -9,12 +9,12 @@ services:
       POSTGRES_USER: rqb
       POSTGRES_PASSWORD: rqb
       POSTGRES_DB: rqb
-    # command: |
-    #   postgres -c config_file=/etc/postgresql/postgresql.conf
+    command: ["postgres", "-c", "logging_collector=on"]
     volumes:
       - rqb-data:/var/lib/postgresql/data/
       - ./logs:/var/log/postgresql
       - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./.dump/init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
     networks:

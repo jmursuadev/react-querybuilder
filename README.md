@@ -45,6 +45,13 @@ After you installed the Docker Desktop. Run the command below:
 docker compose up -d
 ```
 
+Your app should be working now
+
+
+## Access Database using pgAdmin
+
+### Follow the steps below:
+
 - Access the pgAdmin browser: http://localhost:5050/browser/
 - You can log in using this credentials:
 ```Username: admin@email.com```
