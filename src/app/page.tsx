@@ -1,40 +1,58 @@
-"use client";
+'use client';
 
-import { DynamicTable } from "@ui/table";
-import { ClientOnly } from "./ClientOnly";
-import { ShadCNQueryBuilder } from "@components/shadcn-querybuilder";
-import { TableField } from "@/types";
+import { DynamicTable } from '@ui/table';
+import { ClientOnly } from './ClientOnly';
+import { ShadCNQueryBuilder } from '@components/shadcn-querybuilder';
+import { TableField } from '@/types';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { fetchUsers } from '@/api/user';
+import { useQueryBuilderQuery } from '@/hooks/useQueryBuilderQuery';
+import { QueryBuilderQueryContext } from '@/contexts/qb-query';
+import { formatQueryToPostgrest } from '@/lib/utils/formatQueryToPostgrest';
 
 // create fields with following format Name, Email, Distinct ID, Updated at, Country Code, Region, City
 const fields = [
-	{ label: "Name", name: "name" },
-	{ label: "Email", name: "email" },
-	{ label: "Distinct ID", name: "distinct_id" },
-	{ label: "Updated at", name: "updated_at" },
-	{ label: "Country Code", name: "country_code" },
-	{ label: "Region", name: "region" },
-	{ label: "City", name: "city" },
+  { label: 'First Name', name: 'first_name' },
+  { label: 'Last Name', name: 'last_name' },
+  { label: 'age', name: 'age' },
+  { label: 'instrument', name: 'instrument' },
+  { label: 'Also Plays', name: 'also_plays' },
 ] satisfies TableField[];
 
 // generate dummy data for table with 10 rows
 const sampleData = Array.from({ length: 10 }, (_, i) => ({
-	name: `Name ${i}`,
-	email: `Email ${i}`,
-	distinct_id: `Distinct ID ${i}`,
-	updated_at: `Updated at ${i}`,
-	country_code: `Country Code ${i}`,
-	region: `Region ${i}`,
-	city: `City ${i}`,
+  name: `Name ${i}`,
+  email: `Email ${i}`,
+  distinct_id: `Distinct ID ${i}`,
+  updated_at: `Updated at ${i}`,
+  country_code: `Country Code ${i}`,
+  region: `Region ${i}`,
+  city: `City ${i}`,
 }));
 
 export default function Home() {
-	return (
-		<main className="flex min-h-screen flex-col gap-10 items-center p-24">
-			<ClientOnly>
-				<ShadCNQueryBuilder />
-			</ClientOnly>
-			<DynamicTable classNameWrapper="max-h-[600px]" fields={fields} data={sampleData} />
+  const { query } = useQueryBuilderQuery();
+  const [data, setData] = useState([]);
 
-		</main>
-	);
+  useEffect(() => {
+    fetchUsers().then(response => {
+      setData(response);
+    });
+  }, []);
+
+  const handleApply = useCallback(() => {
+    const params = formatQueryToPostgrest(query);
+    fetchUsers(params).then(response => {
+      setData(response);
+    });
+  }, [query]);
+
+  return (
+    <main className="flex min-h-screen flex-col gap-10 items-center p-24">
+      <ClientOnly>
+        <ShadCNQueryBuilder onApply={handleApply} />
+      </ClientOnly>
+      <DynamicTable classNameWrapper="max-h-[600px]" fields={fields} data={data} />
+    </main>
+  );
 }

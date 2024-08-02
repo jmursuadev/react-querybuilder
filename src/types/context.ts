@@ -1,5 +1,5 @@
 import { DayPickerContextValue } from "react-day-picker";
-import { FullField, QueryBuilderContextProviderProps } from "react-querybuilder";
+import { FullField, QueryBuilderContextProviderProps, RuleGroupTypeIC } from "react-querybuilder";
 
 export interface QueryBuilderShadCNContextType {
 	recentField?: FullField | null;
@@ -14,4 +14,9 @@ export type QueryBuilderShadCNProps = QueryBuilderContextProviderProps & {
 export interface ShadCNDayPickerContextType extends DayPickerContextValue {
 	numberOfMonths: number;
 	setNumberOfMonths: (n: number) => void;
+}
+
+export interface QueryBuilderQueryContextType {
+	query: RuleGroupTypeIC;
+	setQuery: (query: RuleGroupTypeIC) => void;
 }
