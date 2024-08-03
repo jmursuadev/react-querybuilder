@@ -6,6 +6,7 @@ export const fetchUsers = async (queryParams: string = '') => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      'ngrok-skip-browser-warning': '1'
     },
   });
 

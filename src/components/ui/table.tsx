@@ -132,7 +132,7 @@ const DynamicTable = React.forwardRef<
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				{data.map((row, index) => (
+				{data?.length > 0 && data.map((row, index) => (
 					<TableRow key={index}>
 						{fields.map((field, index) => (
 							<TableCell key={index}>{row[field.name]}</TableCell>

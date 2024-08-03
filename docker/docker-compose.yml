@@ -14,7 +14,7 @@ services:
       - rqb-data:/var/lib/postgresql/data/
       - ./logs:/var/log/postgresql
       - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf
-      - ./.dump/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./.dump:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
     networks:
