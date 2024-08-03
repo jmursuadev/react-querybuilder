@@ -56,7 +56,6 @@ services:
       - "8080:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      # - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
       - rqb-network
 
